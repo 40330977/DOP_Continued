@@ -17,7 +17,7 @@ const int gameWidth = 800;
 const int gameHeight = 600;
 int invaders_rows;
 int invaders_columns;
-//float r1, c1;
+float r1, c1;
 
 void Load() {
 	if (!spritesheet.loadFromFile("C:/Users/40330977/Desktop/Games_Engineering_1/res/invaders_sheet.png")) {
@@ -32,9 +32,9 @@ void Load() {
 	for (int r = 0; r < invaders_rows; ++r) {
 		auto rect = IntRect(0, 0, 32, 32);
 		for (int c = 0; c < invaders_columns; ++c) {
-			/*r1 = r;
-			c1 = c;*/
-			Vector2f position = Vector2f(r+100, c+100);
+			r1 = 100 + r * 15;
+			c1 = 100 + c * 15;
+			Vector2f position = {r1 , c1 };
 			auto inv = new Invader(rect, position);
 			ships.push_back(inv);
 		}
@@ -66,7 +66,7 @@ void Update(RenderWindow &window) {
 
 void Render(RenderWindow &window) {
 	// Draw Everything
-	//window.draw(invader);
+	window.draw(invader);
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
