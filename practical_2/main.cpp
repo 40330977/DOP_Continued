@@ -1,11 +1,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "ship.h"
 
 using namespace sf;
 using namespace std;
 
 sf::Texture spritesheet;
 sf::Sprite invader;
+std::vector<Ship *> ships;
 
 //void Load();
 

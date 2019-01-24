@@ -23,7 +23,7 @@ target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
 target_link_libraries(PRACTICAL_1 sfml-graphics)
 
 ## Space invaders
-file(GLOB_RECURSE SOURCES practical_2/*.cpp 2_invaders/*.h)
+file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
 add_executable(2_INVADERS ${SOURCES} )
 target_include_directories(2_INVADERS SYSTEM PRIVATE ${SFML_INCS})
 target_link_libraries(2_INVADERS sfml-graphics)
