@@ -5,7 +5,9 @@ using namespace sf;
 using namespace std;
 
 bool Invader::direction;
-float Invader::speed;
+float Invader::speed = 10.0f;
+float direction1 = 0.0f;
+float pspeed = 0.5f;
 
 Ship::Ship() {};
 
@@ -13,6 +15,13 @@ Ship::Ship(IntRect ir) : Sprite() {
 	_sprite = ir;
 	setTexture(spritesheet);
 	setTextureRect(_sprite);
+};
+
+const Keyboard::Key controls[4] = {
+	Keyboard::A,   // Player1 UP
+	Keyboard::S,   // Player1 Down
+	Keyboard::Left,  // Player2 UP
+	Keyboard::Right // Player2 Down
 };
 
 void Ship::Update(const float &dt) {}
@@ -41,4 +50,23 @@ void Invader::Update(const float &dt) {
 			ships[i]->move(0, 24);
 		}
 	}
+}
+
+//ship.cpp
+Player::Player() : Ship(IntRect(160, 32, 32, 32)) {
+	setPosition({ gameHeight * .5f, gameHeight - 32.f });
+}
+
+void Player::Update(const float &dt) {
+	Ship::Update(dt);
+	//Move left
+	if (Keyboard::isKeyPressed(controls[0])) {
+		direction1--;
+	}
+		//Move Right
+	if (Keyboard::isKeyPressed(controls[1])) {
+		direction1++;
+	}
+
+	move(direction1 * pspeed * dt, 0);
 }

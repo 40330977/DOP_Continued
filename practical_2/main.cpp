@@ -9,31 +9,33 @@ using namespace std;
 sf::Texture spritesheet;
 sf::Sprite invader;
 std::vector<Ship *> ships;
-
+Player *player = new Player();
 
 //void Load();
 
 const int gameWidth = 800;
 const int gameHeight = 600;
-int invaders_rows;
-int invaders_columns;
+int invaders_rows = 20;
+int invaders_columns = 5;
 float r1, c1;
 
 void Load() {
 	if (!spritesheet.loadFromFile("C:/Users/40330977/Desktop/Games_Engineering_1/res/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
 	}
-	invader.setTexture(spritesheet);
-	invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
+	/*invader.setTexture(spritesheet);
+	invader.setTextureRect(sf::IntRect(0, 0, 32, 32));*/
 
 	/*Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), { 100,100 });
 	ships.push_back(inv);*/
 
+	
+
 	for (int r = 0; r < invaders_rows; ++r) {
 		auto rect = IntRect(0, 0, 32, 32);
 		for (int c = 0; c < invaders_columns; ++c) {
-			r1 = 100 + r * 15;
-			c1 = 100 + c * 15;
+			r1 = 100 + r * 30;
+			c1 = 100 + c * 30;
 			Vector2f position = {r1 , c1 };
 			auto inv = new Invader(rect, position);
 			ships.push_back(inv);
@@ -62,11 +64,14 @@ void Update(RenderWindow &window) {
 	for (auto &s : ships) {
 		s->Update(dt);
 	}
+
+	player->Update(dt);
 }
 
 void Render(RenderWindow &window) {
 	// Draw Everything
-	window.draw(invader);
+
+	window.draw(*player);
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
