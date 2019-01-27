@@ -4,16 +4,14 @@
 using namespace sf;
 using namespace std;
 
+Bullet::Bullet() {};
 //Create definition for the constructor
 //...
 Bullet::Bullet(const sf::Vector2f &pos, const bool mode) {}
 //void Bullet::_Update(const float & dt)
 //{
 //}
-Bullet::Bullet()
-{
-}
-;
+
 
 //void Render(sf::RenderWindow &window);
 

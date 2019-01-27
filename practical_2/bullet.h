@@ -15,7 +15,7 @@ public:
 protected:
 	static unsigned char bulletPointer;
 	static Bullet bullets[256];
-	void _Update(const float &dt);
+	void Update(const float &dt);
 
 	Bullet();
 	//false=player bullet, true=Enemy bullet
