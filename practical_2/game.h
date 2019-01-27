@@ -1,4 +1,5 @@
 //game.h
+#include "Ship.h"
 #pragma once
 #include <SFML/Graphics.hpp>
 constexpr uint16_t gameWidth = 800;
