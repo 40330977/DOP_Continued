@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "ship.h"
+#include "bullet.h"
+#include "game.h"
 
 using namespace sf;
 using namespace std;
@@ -11,12 +13,14 @@ sf::Sprite invader;
 std::vector<Ship *> ships;
 Player *player = new Player();
 
+
+
 //void Load();
 
-const int gameWidth = 800;
-const int gameHeight = 600;
-int invaders_rows = 20;
-int invaders_columns = 5;
+//const int gameWidth = 800;
+//const int gameHeight = 600;
+//int invaders_rows = 5;
+//int invaders_columns = 12;
 float r1, c1;
 
 void Load() {
@@ -66,6 +70,10 @@ void Update(RenderWindow &window) {
 	}
 
 	player->Update(dt);
+
+	/*for (auto &b : bullets) {
+		b.Update(dt);
+	}*/
 }
 
 void Render(RenderWindow &window) {
@@ -89,3 +97,7 @@ void Render(RenderWindow &window) {
 		}
 		return 0;
 	}
+
+	/*void firer() {
+		Fire()
+	}*/
