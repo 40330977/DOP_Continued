@@ -12,3 +12,4 @@ extern sf::Texture spritesheet;
 extern std::vector<Ship *> ships;
 extern Player *player;
 extern Bullet bullets[256];
+extern unsigned char bulletpointer;

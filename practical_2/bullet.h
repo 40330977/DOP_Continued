@@ -11,6 +11,7 @@ public:
 	static void Fire(const sf::Vector2f &pos, const bool mode);
 
 	Bullet(const sf::Vector2f &pos, const bool mode);
+
 	~Bullet() = default;
 protected:
 	static unsigned char bulletPointer;

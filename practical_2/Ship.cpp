@@ -68,5 +68,11 @@ void Player::Update(const float &dt) {
 		direction1++;
 	}
 
+	/*if (Keyboard::isKeyPressed(Keyboard::D)) {
+		Bullet* b = new Bullet(getPosition(), false);
+		b->Update(dt);
+		
+	}*/
+
 	move(direction1 * pspeed * dt, 0);
 }

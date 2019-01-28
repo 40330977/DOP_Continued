@@ -15,6 +15,7 @@ Player *player = new Player();
 
 
 
+
 //void Load();
 
 //const int gameWidth = 800;
@@ -72,8 +73,17 @@ void Update(RenderWindow &window) {
 	player->Update(dt);
 
 	/*for (auto &b : bullets) {
-		b.Update(dt);
+		b->Update(dt);
 	}*/
+	if (Keyboard::isKeyPressed(Keyboard::D)) {
+		bullets->Fire(player->getPosition(), false);
+
+	}
+	bullets[bulletpointer].Update(dt);
+
+	
+
+
 }
 
 void Render(RenderWindow &window) {
@@ -83,6 +93,7 @@ void Render(RenderWindow &window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
+	
 }
 
 
