@@ -1,6 +1,7 @@
 //ship.cpp
 #include "ship.h"
 #include "game.h"
+#include "bullet.h"
 using namespace sf;
 using namespace std;
 
@@ -68,11 +69,11 @@ void Player::Update(const float &dt) {
 		direction1++;
 	}
 
-	/*if (Keyboard::isKeyPressed(Keyboard::D)) {
-		Bullet* b = new Bullet(getPosition(), false);
-		b->Update(dt);
+	
+	if (Keyboard::isKeyPressed(Keyboard::D)) {
+		Bullet::Fire(getPosition(), false);
 		
-	}*/
+	}
 
 	move(direction1 * pspeed * dt, 0);
 }

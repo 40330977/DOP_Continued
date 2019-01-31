@@ -75,13 +75,13 @@ void Update(RenderWindow &window) {
 	/*for (auto &b : bullets) {
 		b->Update(dt);
 	}*/
-	if (Keyboard::isKeyPressed(Keyboard::D)) {
+	/*if (Keyboard::isKeyPressed(Keyboard::D)) {
 		bullets->Fire(player->getPosition(), false);
 
 	}
-	bullets[bulletpointer].Update(dt);
+	bullets[bulletpointer].Update(dt);*/
 
-	
+	Bullet::Update(dt);
 
 
 }
@@ -93,6 +93,8 @@ void Render(RenderWindow &window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
+	
+	Bullet::Render(window);
 	
 }
 

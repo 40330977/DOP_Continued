@@ -4,13 +4,13 @@
 
 class Bullet : public sf::Sprite {
 public:
-	void Update(const float &dt);
+	static void Update(const float &dt);
 	//Render's All bullets
 	static void Render(sf::RenderWindow &window);
 	//Chose an inactive bullet and use it.
 	static void Fire(const sf::Vector2f &pos, const bool mode);
 
-	Bullet(const sf::Vector2f &pos, const bool mode);
+	//Bullet(const sf::Vector2f &pos, const bool mode);
 
 	~Bullet() = default;
 protected:
