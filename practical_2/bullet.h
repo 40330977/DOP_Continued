@@ -10,6 +10,8 @@ public:
 	//Chose an inactive bullet and use it.
 	static void Fire(const sf::Vector2f &pos, const bool mode);
 
+	//static void Ship::Explode();
+
 	//Bullet(const sf::Vector2f &pos, const bool mode);
 
 	~Bullet() = default;
