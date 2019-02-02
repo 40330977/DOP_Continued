@@ -27,6 +27,7 @@ float r1, c1;
 void Load() {
 	if (!spritesheet.loadFromFile("C:/Users/40330977/Desktop/Games_Engineering_1/res/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet!" << std::endl;
+		spritesheet.loadFromFile("C:/Users/Roddy/Desktop/Games_Engineering_1/res/invaders_sheet.png");
 	}
 	/*invader.setTexture(spritesheet);
 	invader.setTextureRect(sf::IntRect(0, 0, 32, 32));*/

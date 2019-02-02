@@ -28,7 +28,7 @@ Bullet Bullet::bullets[256];
 	
 }*/
 void Bullet::_Update(const float & dt)
-{git status
+{//git status
 	auto p = getPosition();
 	if(p.y > -16.0f && p.y < (gameHeight+16.0f)){
 		move(0, dt * 200.0f * (_mode ? 1.0f : -1.0f));
