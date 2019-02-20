@@ -11,15 +11,15 @@ namespace sf {
 	typedef Vector2<size_t> Vector2ul;
 	// Returns the length of a sf::vector
 	template <typename T> double length(const Vector2<T> &v) {
-		return sqrt(...);
+		return sqrt((v.x*v.x + v.y*v.y));
 	}
 	// return normalized sf::vector
 	template <typename T> Vector2<T> normalize(const Vector2<T> &v) {
 		Vector2<T> vector;
 		double l = length(v);
 		if (l != 0) {
-			vector.x = ...
-				vector.y = ...
+			vector.x = v.x / l;
+			vector.y = v.y / l;
 		}
 		return vector;
 	}
@@ -30,7 +30,8 @@ namespace sf {
 	};
 	// Degreess to radians conversion
 	static double deg2rad(double degrees) {
-		return ...
+		double pie = 3.14 / 180;
+		return degrees * pie;
 	}
 	//Rotate a sf::vector by an angle(degrees)
 	template <typename T>
