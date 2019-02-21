@@ -34,6 +34,12 @@ add_executable(PRACTICAL_3 ${SOURCES})
 target_include_directories(PRACTICAL_3 PRIVATE ${SFML_INCS})
 target_link_libraries(PRACTICAL_3 lib_tile_level_loader sfml-graphics)
 
+#### Practical 4 ####
+file(GLOB_RECURSE SOURCES practical_4/*.cpp practical_4/*.h)
+add_executable(PRACTICAL_4 ${SOURCES})
+target_include_directories(PRACTICAL_4 PRIVATE ${SFML_INCS})
+target_link_libraries(PRACTICAL_4 lib_tile_level_loader sfml-graphics)
+
 ## Tile loader lib
 file(GLOB_RECURSE SOURCE_FILES lib_tile_level_loader/*.cpp lib_tile_level_loader/*.h)
 add_library(lib_tile_level_loader STATIC ${SOURCE_FILES})
