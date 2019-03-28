@@ -7,11 +7,11 @@
 using namespace sf;
 using namespace std;
 
-Player *player = new Player();
-Ghost *ghost1 = new Ghost();
-Ghost *ghost2 = new Ghost();
-Ghost *ghost3 = new Ghost();
-Ghost *ghost4 = new Ghost();
+shared_ptr<Player> player = make_shared<Player>(new Player());
+shared_ptr<Ghost> ghost1 = make_shared<Ghost>(new Ghost());
+shared_ptr<Ghost> ghost2 = make_shared<Ghost>(new Ghost());
+shared_ptr<Ghost> ghost3 = make_shared<Ghost>(new Ghost());
+shared_ptr<Ghost> ghost4 = make_shared<Ghost>(new Ghost());
 
 //vector<Entity*> entities;
 EntityManager em;

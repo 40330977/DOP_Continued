@@ -4,11 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-struct EntityManager {
-	std::vector<std::shared_ptr<Entity>> list;
-	void update(double dt);
-	void render(sf::RenderWindow &window);
-};
+
 
 class Entity {
 
@@ -29,4 +25,10 @@ public:
 	const sf::Vector2f getPosition();
 	void setPosition(const sf::Vector2f &pos);
 	void move(const sf::Vector2f &pos);
+};
+
+struct EntityManager {
+	std::vector<std::shared_ptr<Entity>> list;
+	void update(double dt);
+	void render(sf::RenderWindow &window);
 };
