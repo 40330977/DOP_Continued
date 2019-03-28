@@ -13,16 +13,31 @@ Ghost *ghost2 = new Ghost();
 Ghost *ghost3 = new Ghost();
 Ghost *ghost4 = new Ghost();
 
+//vector<Entity*> entities;
+EntityManager em;
+
+
 const int gameWidth = 1600;
 const int gameHeight = 1200;
 
 void Load() {
+
+	em.list.push_back(player);
+	em.list.push_back(ghost1);
+	em.list.push_back(ghost2);
+	em.list.push_back(ghost3);
+	em.list.push_back(ghost4);
+
+	
+
 	player->setPosition(sf::Vector2f(400, 300));
 
-	ghost1->setPosition(sf::Vector2f(200, 300));
-	ghost2->setPosition(sf::Vector2f(200, 300));
+	ghost1->setPosition(sf::Vector2f(200, 100));
+	ghost2->setPosition(sf::Vector2f(200, 200));
 	ghost3->setPosition(sf::Vector2f(200, 300));
-	ghost4->setPosition(sf::Vector2f(200, 300));
+	ghost4->setPosition(sf::Vector2f(200, 400));
+
+	
 }
 
 void Update(RenderWindow &window) {
@@ -43,20 +58,34 @@ void Update(RenderWindow &window) {
 		window.close();
 	}
 
-	player->update(dt);
+	em.update(dt);
+
+	/*for (auto e : entities)
+	{
+		e->update(dt);
+	}*/
+	/*player->update(dt);
 	ghost1->update(dt);
 	ghost2->update(dt);
 	ghost3->update(dt);
-	ghost4->update(dt);
+	ghost4->update(dt);*/
 }
 
 void Render(RenderWindow &window) {
 	// Draw Everything
-	player->render(window);
+
+	em.render(window);
+
+	/*for (auto e : entities)
+	{
+		e->render(window);
+	}*/
+
+	/*player->render(window);
 	ghost1->render(window);
 	ghost2->render(window);
 	ghost3->render(window);
-	ghost4->render(window);
+	ghost4->render(window);*/
 }
 
 int main() {

@@ -14,3 +14,19 @@ void Entity::update(const double dt) {
 }
 
 Entity::Entity(unique_ptr<Shape> s) : _shape(std::move(s)) {}
+
+void EntityManager::update(double dt)
+{
+	for (auto e : list)
+	{
+		e->update;
+	}
+}
+
+void EntityManager::render(sf::RenderWindow & window)
+{
+	for (auto e : list)
+	{
+		e->render;
+	}
+}

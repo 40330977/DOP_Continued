@@ -4,7 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+struct EntityManager {
+	std::vector<std::shared_ptr<Entity>> list;
+	void update(double dt);
+	void render(sf::RenderWindow &window);
+};
+
 class Entity {
+
+	
+
 protected:
 	std::unique_ptr<sf::Shape> _shape;
 	sf::Vector2f _position;

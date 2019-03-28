@@ -8,32 +8,39 @@ float yerg = 0.0f;
 float directionxg;
 float directionyg;
 int moveswitch;
+int counter = 0;
 
 void Ghost::update(double dt) {
 	
-	std::mt19937 rng;
-	rng.seed(std::random_device()());
-	std::uniform_int_distribution<std::mt19937::result_type> dist6(1, 4);
+	counter++;
+	
 
-	moveswitch = dist6(rng);
+	if (counter == 500)
+	{
+		std::mt19937 rng;
+		rng.seed(std::random_device()());
+		std::uniform_int_distribution<std::mt19937::result_type> dist6(1, 4);
 
-	if (moveswitch == 1) {
-		directionxg = -100.0;
-		directionyg = 0.0f;
-	}
-	else if (moveswitch == 2) {
-		directionxg = 0.0f;
-		directionyg = -100.0f;
-	}
-	else if (moveswitch == 3) {
-		directionxg = 100.0f;
-		directionyg = 0.0f;
-	}
-	else if (moveswitch == 4) {
-		directionxg = 0.0f;
-		directionyg = 100.0f;
-	}
+		moveswitch = dist6(rng);
 
+		if (moveswitch == 1) {
+			directionxg = -10.0;
+			directionyg = 0.0f;
+		}
+		else if (moveswitch == 2) {
+			directionxg = 0.0f;
+			directionyg = -10.0f;
+		}
+		else if (moveswitch == 3) {
+			directionxg = 10.0f;
+			directionyg = 0.0f;
+		}
+		else if (moveswitch == 4) {
+			directionxg = 0.0f;
+			directionyg = 10.0f;
+		}
+		counter = 0;
+	}
 	
 
 	xerg = directionxg * _speed * dt;
