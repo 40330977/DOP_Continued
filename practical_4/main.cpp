@@ -7,11 +7,13 @@
 using namespace sf;
 using namespace std;
 
+//shared_ptr<Player> player = make_shared<Player>();
+
 shared_ptr<Player> player = make_shared<Player>(new Player());
-shared_ptr<Ghost> ghost1 = make_shared<Ghost>(new Ghost());
+/*shared_ptr<Ghost> ghost1 = make_shared<Ghost>(new Ghost());
 shared_ptr<Ghost> ghost2 = make_shared<Ghost>(new Ghost());
 shared_ptr<Ghost> ghost3 = make_shared<Ghost>(new Ghost());
-shared_ptr<Ghost> ghost4 = make_shared<Ghost>(new Ghost());
+shared_ptr<Ghost> ghost4 = make_shared<Ghost>(new Ghost());*/
 
 //vector<Entity*> entities;
 EntityManager em;
@@ -22,20 +24,20 @@ const int gameHeight = 1200;
 
 void Load() {
 
-	em.list.push_back(player);
-	em.list.push_back(ghost1);
+	//em.list.push_back(player);
+	/*em.list.push_back(ghost1);
 	em.list.push_back(ghost2);
 	em.list.push_back(ghost3);
-	em.list.push_back(ghost4);
+	em.list.push_back(ghost4);*/
 
 	
+	//em.list[0]->setPosition(sf::Vector2f(400, 300));
+	//player->setPosition(sf::Vector2f(400, 300));
 
-	player->setPosition(sf::Vector2f(400, 300));
-
-	ghost1->setPosition(sf::Vector2f(200, 100));
+	/*ghost1->setPosition(sf::Vector2f(200, 100));
 	ghost2->setPosition(sf::Vector2f(200, 200));
 	ghost3->setPosition(sf::Vector2f(200, 300));
-	ghost4->setPosition(sf::Vector2f(200, 400));
+	ghost4->setPosition(sf::Vector2f(200, 400));*/
 
 	
 }
