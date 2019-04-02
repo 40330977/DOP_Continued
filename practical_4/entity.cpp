@@ -17,16 +17,17 @@ Entity::Entity(unique_ptr<Shape> s) : _shape(std::move(s)) {}
 
 void EntityManager::update(double dt)
 {
-	for (int i = 0; i <5; i++)
+	for (auto i : list)
 	{
-		list[i]->update(dt);
+		i->update(dt);
+
 	}
 }
 
 void EntityManager::render(sf::RenderWindow & window)
 {
-	for (int i = 0; i < 5; i++)
+	for (auto i : list)
 	{
-		list[i]->render(window);
+		i->render(window);
 	}
 }
