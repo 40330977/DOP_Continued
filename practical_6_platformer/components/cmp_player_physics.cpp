@@ -59,7 +59,11 @@ void PlayerPhysicsComponent::update(double dt) {
     if (_grounded) {
       setVelocity(Vector2f(getVelocity().x, 0.f));
       teleport(Vector2f(pos.x, pos.y - 2.0f));
-      impulse(Vector2f(0, -6.f));
+	  if (Keyboard::isKeyPressed(Keyboard::D))
+	  {
+		  impulse(Vector2f(0, -10.f));
+	  }
+	  else { impulse(Vector2f(0, -6.f)); }
     }
   }
 
@@ -71,6 +75,17 @@ void PlayerPhysicsComponent::update(double dt) {
     setFriction(0.f);
   } else {
     setFriction(0.1f);
+  }
+
+  if (Keyboard::isKeyPressed(Keyboard::S))
+	{
+		_maxVelocity = Vector2f(600.f, 800.f);
+		_groundspeed = 160.0f;
+	}
+  else 
+  {
+	  _maxVelocity = Vector2f(200.f, 400.f);
+	  _groundspeed = 30.f;
   }
 
   // Clamp velocity.

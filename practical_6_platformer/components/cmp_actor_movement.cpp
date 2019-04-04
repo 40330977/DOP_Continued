@@ -5,7 +5,13 @@
 using namespace sf;
 using namespace std;
 
-void ActorMovementComponent::update(double dt) {}
+void ActorMovementComponent::update(double dt) 
+{
+	/*if (Keyboard::isKeyPressed(Keyboard::S))
+	{
+		_speed = 150.0f;
+	}*/
+}
 
 ActorMovementComponent::ActorMovementComponent(Entity* p)
     : _speed(100.0f), Component(p) {}

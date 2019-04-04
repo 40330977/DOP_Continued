@@ -26,11 +26,6 @@ void Level2Scene::Load() {
 	  s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
 	  s->getShape().setFillColor(Color::Magenta);
 	  s->getShape().setOrigin(10.f, 15.f);
-
-
-
-
-
     // *********************************
     player->addTag("player");
     player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
