@@ -72,6 +72,9 @@ void Level1Scene::Update(const double& dt) {
 	 /* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 	  p->Sizer(Vector2f(50.f, 50.f));*/
 
+	  auto p = player->get_components<PlayerPhysicsComponent>()[0];
+	  p->
+
 	 /* auto s = player->addComponent<ShapeComponent>();
 	  s->setShape<sf::CircleShape>(float(10.f));
 	  s->getShape().setFillColor(Color::White);
