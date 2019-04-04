@@ -24,11 +24,12 @@ void Level3Scene::Load() {
 	  auto s = player->addComponent<ShapeComponent>();
 	  s->setShape<sf::CircleShape>(20.f);
 	  s->getShape().setFillColor(Color::White);
-	  s->getShape().setOrigin(10.f, 15.f);
+	  s->getShape().setOrigin(20.f, 20.f);
 
+	  
 	  // *********************************
 	  player->addTag("player");
-	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+	  player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
 
     // pl->setPosition({100, 100});
 	  player->setPosition(Vector2f(100.f, 100.f));

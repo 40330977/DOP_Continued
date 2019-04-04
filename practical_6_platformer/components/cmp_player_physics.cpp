@@ -66,6 +66,7 @@ void PlayerPhysicsComponent::update(double dt) {
 	  else { impulse(Vector2f(0, -6.f)); }
     }
   }
+  
 
   //Are we in air?
   if (!_grounded) {
@@ -94,6 +95,13 @@ void PlayerPhysicsComponent::update(double dt) {
   v.y = copysign(min(abs(v.y), _maxVelocity.y), v.y);
   setVelocity(v);
 
+  bool isbigger = false;
+  if (Keyboard::isKeyPressed(Keyboard::A) && isbigger == false)
+  {
+	  //_size *= 2.0;
+	  isbigger = true;
+  }
+
   PhysicsComponent::update(dt);
 }
 
@@ -109,3 +117,8 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
   //Bullet items have higher-res collision detection
   _body->SetBullet(true);
 }
+
+//void PlayerPhysicsComponent::Sizer(Vector2f sizes)
+//{
+//	_size = sv2_to_bv2(sizes, true);
+//}
