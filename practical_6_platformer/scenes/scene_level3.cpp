@@ -22,9 +22,10 @@ void Level3Scene::Load() {
 	  player = makeEntity();
 	  player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
 	  auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-	  s->getShape().setFillColor(Color::Magenta);
+	  s->setShape<sf::CircleShape>(20.f);
+	  s->getShape().setFillColor(Color::White);
 	  s->getShape().setOrigin(10.f, 15.f);
+
 	  // *********************************
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));

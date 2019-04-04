@@ -5,10 +5,13 @@ using namespace std;
 using namespace sf;
 
 using namespace Physics;
+//b2Vec2 gravmod = Physics::GetWorld()->GetGravity();
 
 void PhysicsComponent::update(double dt) {
   _parent->setPosition(invert_height(bv2_to_sv2(_body->GetPosition())));
   _parent->setRotation((180 / b2_pi) * _body->GetAngle());
+
+ 
 }
 
 PhysicsComponent::PhysicsComponent(Entity* p, bool dyn,

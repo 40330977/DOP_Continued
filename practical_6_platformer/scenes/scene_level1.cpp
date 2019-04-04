@@ -23,8 +23,8 @@ void Level1Scene::Load() {
     player = makeEntity();
     player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
     auto s = player->addComponent<ShapeComponent>();
-    s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-    s->getShape().setFillColor(Color::Magenta);
+    s->setShape<sf::CircleShape>(20.f);
+    s->getShape().setFillColor(Color::White);
     s->getShape().setOrigin(10.f, 15.f);
 
     player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
@@ -61,6 +61,28 @@ void Level1Scene::Update(const double& dt) {
   if (ls::getTileAt(player->getPosition()) == ls::END) {
     Engine::ChangeScene((Scene*)&level2);
   }
+ // if (Keyboard::isKeyPressed(Keyboard::A))
+ // {
+	//  
+	// /* auto s = player->addComponent<ShapeComponent>();
+	//  s->setShape<sf::CircleShape>(float(10.f));
+	//  s->getShape().setFillColor(Color::White);
+	//  s->getShape().setOrigin(10.f, 15.f);
+	//  player->get_components<ShapeComponent>().swap(s)*/
+	//  //player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+	//}
+ // else {
+	// /* auto s = player->get_components<ShapeComponent>();
+	//  s.resize(1.0f);*/
+	//  //player.reset();
+	//  /*auto s = player->addComponent<ShapeComponent>();
+	//  s->setShape<sf::CircleShape>(float(20.f));
+	//  s->getShape().setFillColor(Color::White);
+	//  s->getShape().setOrigin(10.f, 15.f);
+
+	//  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+ // }
+
   Scene::Update(dt);
 }
 
