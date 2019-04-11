@@ -46,7 +46,7 @@ void Level1Scene::Load() {
   }
 
   //Simulate long loading times
-  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+//  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
   cout << " Scene 1 Load Done" << endl;
 
   setLoaded(true);
@@ -59,47 +59,56 @@ void Level1Scene::UnLoad() {
   Scene::UnLoad();
 }
 
+bool isbigger = false;
+double cooldown = 0;
 void Level1Scene::Update(const double& dt) {
+	if (cooldown >= 0) { cooldown -= dt; }
 
-  
-  bool isbigger = false;
-  if (Keyboard::isKeyPressed(Keyboard::A) && isbigger == false)
-  {
-	  auto s = player->get_components<ShapeComponent>()[0];
-	  s->getShape().setScale(0.5f, 0.5f);
-	  isbigger = true;
+	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A)){
+		cooldown = 1.0;
+		if (isbigger == false)
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(0.5f, 0.5f);
+			isbigger = true;
 
-	 /* auto p = player->get_components<PlayerPhysicsComponent>()[0];
-	  p->Sizer(Vector2f(50.f, 50.f));*/
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(50.f, 50.f));*/
 
-	  auto p = player->get_components<PlayerPhysicsComponent>()[0];
-	  p->
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f((0.5f*35.f), (0.5f*35.f)));
+			//p->
 
-	 /* auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::CircleShape>(float(10.f));
-	  s->getShape().setFillColor(Color::White);
-	  s->getShape().setOrigin(10.f, 15.f);*/
-	  /*player->get_components<ShapeComponent>().swap(s)
-	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+		   /* auto s = player->addComponent<ShapeComponent>();
+			s->setShape<sf::CircleShape>(float(10.f));
+			s->getShape().setFillColor(Color::White);
+			s->getShape().setOrigin(10.f, 15.f);*/
+			/*player->get_components<ShapeComponent>().swap(s)
+			player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+
+		}
+		else
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(1.0f, 1.0f);
+			isbigger = false;
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f(35.f, 35.f));
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(35.f, 35.f));*/
+
+			 /* auto s = player->get_components<ShapeComponent>();
+			  s.resize(1.0f);*/
+			  //player.reset();
+			  /*auto s = player->addComponent<ShapeComponent>();
+			  s->setShape<sf::CircleShape>(float(20.f));
+			  s->getShape().setFillColor(Color::White);
+			  s->getShape().setOrigin(10.f, 15.f);
+
+			  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+		}
 	}
-  else {
-	  auto s = player->get_components<ShapeComponent>()[0];
-	  s->getShape().setScale(1.0f, 1.0f);
-	  isbigger = false;
-
-	 /* auto p = player->get_components<PlayerPhysicsComponent>()[0];
-	  p->Sizer(Vector2f(35.f, 35.f));*/
-
-	 /* auto s = player->get_components<ShapeComponent>();
-	  s.resize(1.0f);*/
-	  //player.reset();
-	  /*auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::CircleShape>(float(20.f));
-	  s->getShape().setFillColor(Color::White);
-	  s->getShape().setOrigin(10.f, 15.f);
-
-	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
-  }
 
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {

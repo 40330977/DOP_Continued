@@ -13,7 +13,7 @@ protected:
 
 public:
   void update(double dt) override;
-
+  void changeSize(const sf::Vector2f& size);
   explicit PlayerPhysicsComponent(Entity* p, const sf::Vector2f& size);
 
   PlayerPhysicsComponent() = delete;

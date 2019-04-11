@@ -63,7 +63,9 @@ void PlayerPhysicsComponent::update(double dt) {
 	  {
 		  impulse(Vector2f(0, -10.f));
 	  }
-	  else { impulse(Vector2f(0, -6.f)); }
+	  else { 
+		  impulse(Vector2f(0, -6.f));
+	  }
     }
   }
   
@@ -103,6 +105,19 @@ void PlayerPhysicsComponent::update(double dt) {
   }
 
   PhysicsComponent::update(dt);
+}
+
+void PlayerPhysicsComponent::changeSize(const Vector2f & size)
+{
+	b2FixtureDef FixtureDef;
+	FixtureDef.friction = 0.1f;
+	FixtureDef.restitution = .2;
+	b2PolygonShape Shape;
+	Shape.SetAsBox(sv2_to_bv2(size).x * 0.5f, sv2_to_bv2(size).y * 0.5f);
+	FixtureDef.shape = &Shape;
+	_body->DestroyFixture(_fixture);
+	_fixture = _body->CreateFixture(&FixtureDef);
+	_size = sv2_to_bv2(size, true);
 }
 
 PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
