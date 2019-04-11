@@ -10,14 +10,13 @@ using namespace std;
 using namespace sf;
 
 static shared_ptr<Entity> player;
-
-
+sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
 
 void Level1Scene::Load() {
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
   cout << " Scene 1 Load" << endl;
   ls::loadLevelFile("res/level_1.txt", 40.0f);
-
+  
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
 
@@ -32,6 +31,11 @@ void Level1Scene::Load() {
 
     player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
   }
+
+  sf::Vector2f sets = player->getPosition();
+  view.setCenter(sets);
+
+  //View::setCenter(player->getPosition());
 
   // Add physics colliders to level tiles.
   {
@@ -157,6 +161,9 @@ void Level1Scene::Update(const double& dt) {
 		}
 	}
 
+	sf::Vector2f sets = player->getPosition();
+	view.setCenter(sets);
+	
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
 	  Engine::ChangeScene((Scene*)&level2);
@@ -164,6 +171,7 @@ void Level1Scene::Update(const double& dt) {
 }
 
 void Level1Scene::Render() {
+	Engine::GetWindow().setView(view);
   ls::render(Engine::GetWindow());
   Scene::Render();
 }
