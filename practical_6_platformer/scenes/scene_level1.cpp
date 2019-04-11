@@ -53,6 +53,17 @@ void Level1Scene::Load() {
     }
   }
 
+  {
+	  auto blanks = ls::findTiles(ls::BLANKED);
+	  for (auto b : blanks) {
+		  auto pos = ls::getTilePosition(b);
+		  pos += Vector2f(20.f, 20.f); //offset to center
+		  auto e = makeEntity();
+		  e->setPosition(pos);
+		  e->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
+	  }
+  }
+
   //Simulate long loading times
 //  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
   cout << " Scene 1 Load Done" << endl;
