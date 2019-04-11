@@ -60,6 +60,7 @@ void Level1Scene::UnLoad() {
 }
 
 bool isbigger = false;
+bool issmaller = false;
 double cooldown = 0;
 void Level1Scene::Update(const double& dt) {
 	if (cooldown >= 0) { cooldown -= dt; }
@@ -92,6 +93,52 @@ void Level1Scene::Update(const double& dt) {
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger = false;
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f(35.f, 35.f));
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(35.f, 35.f));*/
+
+			 /* auto s = player->get_components<ShapeComponent>();
+			  s.resize(1.0f);*/
+			  //player.reset();
+			  /*auto s = player->addComponent<ShapeComponent>();
+			  s->setShape<sf::CircleShape>(float(20.f));
+			  s->getShape().setFillColor(Color::White);
+			  s->getShape().setOrigin(10.f, 15.f);
+
+			  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+		}
+	}
+
+	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::Q)) {
+		cooldown = 1.0;
+		if (issmaller == false)
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(2.0f, 2.0f);
+			issmaller = true;
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(50.f, 50.f));*/
+
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f((2.0f*35.f), (2.0f*35.f)));
+			//p->
+
+		   /* auto s = player->addComponent<ShapeComponent>();
+			s->setShape<sf::CircleShape>(float(10.f));
+			s->getShape().setFillColor(Color::White);
+			s->getShape().setOrigin(10.f, 15.f);*/
+			/*player->get_components<ShapeComponent>().swap(s)
+			player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+
+		}
+		else
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(1.0f, 1.0f);
+			issmaller = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			p->changeSize(Vector2f(35.f, 35.f));
 
