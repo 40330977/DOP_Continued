@@ -9,11 +9,11 @@ using namespace sf;
 
 void MenuScene::Load() {
   cout << "Menu Load \n";
- /* {
+  {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>(
         "Platformer\nPress Space to Start");
-  }*/
+  }
   setLoaded(true);
 }
 

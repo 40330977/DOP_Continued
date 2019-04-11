@@ -10,6 +10,7 @@ using namespace std;
 using namespace sf;
 
 static shared_ptr<Entity> player;
+static shared_ptr<Entity> focus;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
 
 void Level1Scene::Load() {
@@ -32,7 +33,10 @@ void Level1Scene::Load() {
     player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
   }
 
-  sf::Vector2f sets = player->getPosition();
+  focus = makeEntity();
+  focus->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+
+  sf::Vector2f sets = focus->getPosition();
   view.setCenter(sets);
 
   //View::setCenter(player->getPosition());
@@ -160,9 +164,12 @@ void Level1Scene::Update(const double& dt) {
 			  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
 		}
 	}
-
-	sf::Vector2f sets = player->getPosition();
-	view.setCenter(sets);
+	//sf::Vector2f viewpos = view.getCenter();
+	sf::Vector2f sets = (player->getPosition()- focus->getPosition());
+	sets / 2.0f;
+	//sets*sf::Vector2f(dt,dt);
+	focus->setPosition(sets);
+	view.setCenter(player->getPosition());
 	
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
