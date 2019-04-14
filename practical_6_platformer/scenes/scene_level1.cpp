@@ -12,6 +12,7 @@ using namespace sf;
 static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
+const float lerp = 1.0f;
 
 void Level1Scene::Load() {
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
@@ -31,13 +32,17 @@ void Level1Scene::Load() {
     s->getShape().setOrigin(20.f, 20.f);
 
     player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
+
   }
 
   focus = makeEntity();
-  focus->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+  focus->setPosition(player->getPosition());
+  //auto s = focus->addComponent<ShapeComponent>();
+  //s->setShape<sf::CircleShape>(20.f);
+  //s->getShape().setFillColor(Color::White);
 
-  sf::Vector2f sets = focus->getPosition();
-  view.setCenter(sets);
+  //sf::Vector2f sets = focus->getPosition();
+  //view.setCenter(sets);
 
   //View::setCenter(player->getPosition());
 
@@ -176,11 +181,16 @@ void Level1Scene::Update(const double& dt) {
 		}
 	}
 	//sf::Vector2f viewpos = view.getCenter();
-	sf::Vector2f sets = (player->getPosition()- focus->getPosition());
-	sets / 2.0f;
-	//sets*sf::Vector2f(dt,dt);
-	focus->setPosition(sets);
-	view.setCenter(player->getPosition());
+	sf::Vector2f pos = focus->getPosition();
+
+	pos.x += (player->getPosition().x - pos.x)*lerp*dt;
+	pos.y += (player->getPosition().y - pos.y)*lerp*dt;
+	
+	focus->setPosition(pos);
+	
+	//focus->setPosition(player->getPosition());
+	//view.setCenter(player->getPosition());
+	view.setCenter(focus->getPosition());
 	
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
