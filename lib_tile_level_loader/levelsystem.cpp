@@ -4,8 +4,10 @@
 using namespace std;
 using namespace sf;
 
+sf::Color colour(160, 160, 160);
+
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, Color::White}, {END, Color::Red}, {BLANKED, Color::Transparent} };
+	{WALL, colour}, {END, Color::Red}, {BLANKED, Color::Transparent} };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
   auto it = _colours.find(t);

@@ -28,11 +28,11 @@ void Level1Scene::Load() {
     player = makeEntity();
     player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
     auto s = player->addComponent<ShapeComponent>();
-    s->setShape<sf::CircleShape>(20.f);
+    s->setShape<sf::CircleShape>(30.f);
     s->getShape().setFillColor(Color::White);
-    s->getShape().setOrigin(20.f, 20.f);
+    s->getShape().setOrigin(30.f, 30.f);
 
-    player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
+    player->addComponent<PlayerPhysicsComponent>(Vector2f(60.f, 60.f));
 
   }
 
@@ -102,7 +102,7 @@ void Level1Scene::Update(const double& dt) {
 			 p->Sizer(Vector2f(50.f, 50.f));*/
 
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f((0.5f*35.f), (0.5f*35.f)));
+			p->changeSize(Vector2f((30.f), (30.f)));
 			//p->
 
 		   /* auto s = player->addComponent<ShapeComponent>();
@@ -119,7 +119,7 @@ void Level1Scene::Update(const double& dt) {
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f(35.f, 35.f));
+			p->changeSize(Vector2f(60.f, 60.f));
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(35.f, 35.f));*/

@@ -61,10 +61,10 @@ void PlayerPhysicsComponent::update(double dt) {
       teleport(Vector2f(pos.x, pos.y - 2.0f));
 	  if (Keyboard::isKeyPressed(Keyboard::D))
 	  {
-		  impulse(Vector2f(0, -10.f));
+		  impulse(Vector2f(0, -14.f));
 	  }
 	  else { 
-		  impulse(Vector2f(0, -6.f));
+		  impulse(Vector2f(0, -7.f));
 	  }
     }
   }
