@@ -17,7 +17,8 @@ const float lerp = 1.0f;
 void Level1Scene::Load() {
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
   cout << " Scene 1 Load" << endl;
-  ls::loadLevelFile("res/level_1.txt", 40.0f);
+  //ls::loadLevelFile("res/level_1.txt", 40.0f);
+  ls::loadLevelFile("res/lvl1.txt", 40.0f);
   
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
@@ -37,9 +38,9 @@ void Level1Scene::Load() {
 
   focus = makeEntity();
   focus->setPosition(player->getPosition());
-  //auto s = focus->addComponent<ShapeComponent>();
-  //s->setShape<sf::CircleShape>(20.f);
-  //s->getShape().setFillColor(Color::White);
+  /*auto s = focus->addComponent<ShapeComponent>();
+  s->setShape<sf::CircleShape>(20.f);
+  s->getShape().setFillColor(Color::Red);*/
 
   //sf::Vector2f sets = focus->getPosition();
   //view.setCenter(sets);

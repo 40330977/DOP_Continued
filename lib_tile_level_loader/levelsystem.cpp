@@ -65,7 +65,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
   }
 
   if (temp_tiles.size() != (w * h)) {
-    throw string("Can't parse level file") + path;
+     throw string("Can't parse level file") + path;
   }
   _tiles = std::make_unique<Tile[]>(w * h);
   _width = w; // set static class vars
