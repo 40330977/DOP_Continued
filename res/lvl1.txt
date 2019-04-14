@@ -1,6 +1,6 @@
 w                                                                                                                                                                                                    w
 w                                                                                                                                                                                                    w
-w                                                                                                                                                                                                    w
+w  s                                                                                                                                                                                                 w
 w                                                                                                                                                                                                    w
 w                                                                                                                                                                                                    w
 w                                                                                                                                                                                                    w
@@ -13,6 +13,6 @@ w                   e                                                           
 w                   www                                                                                                                                                                              w
 w                        w                                                                                                                                                                           w
 w                       ww                                                                                                                                                                           b
-w s             w       ww                                                                                                                                                                           b
-w  w           www                                                                                                                                                                                   b
+w               w       ww                                                                                                                                                                           b
+w              www                                                                                                                                                                                   b
 wwwww   wwwwwwwwwwww  wwwwww  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
