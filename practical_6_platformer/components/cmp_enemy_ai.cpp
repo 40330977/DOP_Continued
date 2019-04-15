@@ -6,6 +6,7 @@ using namespace std;
 using namespace sf;
 
 float gsim = 0;
+float spawner = 0;
 
 void EnemyAIComponent::update(double dt) {
   auto mov = _direction * (float)(dt * _speed);
@@ -20,6 +21,7 @@ void EnemyAIComponent::update(double dt) {
 	  _direction.y *= -1.f;
   }
 
+
   if (_direction.y<0 && gsim>1000.0f)
   {
 	  _direction.y *= -1.f;
@@ -28,10 +30,20 @@ void EnemyAIComponent::update(double dt) {
   move(_direction * (float)(dt * _speed));
   ActorMovementComponent::update(dt);
   gsim++;
+  spawner++;
+  if (spawner > 5.0f)
+  {
+	  spawner = 0;
+  }
   const auto pos = _parent->getPosition();
   //Teleport to start if we fall off map.
   if (pos.y > ls::getHeight() * ls::getTileSize()) {
-	  _parent->setPosition(Vector2f(0.0f, 0.0f));
+	  _parent->setPosition(Vector2f(50.f, 0));
+  }
+
+  if (pos.x < 1.0f)
+  {
+	  _parent->setPosition(Vector2f(50.f, 0));
   }
 }
 
@@ -40,7 +52,7 @@ EnemyAIComponent::EnemyAIComponent(Entity* p) : ActorMovementComponent(p), _play
 	//Vector2f chaser = pl->getPosition() - _parent->getPosition();
 	 //length(chaser);
  // _direction = Vector2f(chaser.x , 1.0f);
-	//_direction = Vector2f(1.0f, 1.0f);
+	_direction = Vector2f(1.0f, 1.0f);
   _jumper = Vector2f(1.0f, 0);
   _speed = 100.0f;
 }

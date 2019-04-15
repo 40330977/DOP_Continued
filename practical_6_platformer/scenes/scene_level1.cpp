@@ -14,6 +14,7 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
+vector<Entity> enemies;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp = 1.0f;
 
@@ -51,7 +52,10 @@ void Level1Scene::Load() {
   //View::setCenter(player->getPosition());
 
   // Create Enemy
+  
   {
+	  
+
 	  auto enemy = makeEntity();
 	  enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
 		  Vector2f(0, 24));
@@ -60,14 +64,37 @@ void Level1Scene::Load() {
 	  enemy->addComponent<HurtComponent>();
 	  // Add ShapeComponent, Red 16.f Circle
 	  auto e = enemy->addComponent<ShapeComponent>();
-	  e->setShape<sf::CircleShape>(float(16.f));
-	  e->getShape().setFillColor(Color::Red);
+	  e->setShape<sf::RectangleShape>(Vector2f(40.f,40.0f));
+	  e->getShape().setFillColor(Color::White);
 	  e->getShape().setOrigin(20.f, 15.f);
 
 
 
 	  // Add EnemyAIComponent
 	  enemy->addComponent<EnemyAIComponent>();
+	  //enemy->addComponent<PhysicsComponent>(true,Vector2f(30.f, 30.f));
+	  // *********************************
+  }
+
+  {
+
+
+	  auto enemy1 = makeEntity();
+	  enemy1->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[1]) +
+		  Vector2f(0, 24));
+	  // *********************************
+	  // Add HurtComponent
+	  enemy1->addComponent<HurtComponent>();
+	  // Add ShapeComponent, Red 16.f Circle
+	  auto e = enemy1->addComponent<ShapeComponent>();
+	  e->setShape<sf::RectangleShape>(Vector2f(40.f, 40.0f));
+	  e->getShape().setFillColor(Color::White);
+	  e->getShape().setOrigin(20.f, 15.f);
+
+
+
+	  // Add EnemyAIComponent
+	  enemy1->addComponent<EnemyAIComponent>();
 	  //enemy->addComponent<PhysicsComponent>(true,Vector2f(30.f, 30.f));
 	  // *********************************
   }
