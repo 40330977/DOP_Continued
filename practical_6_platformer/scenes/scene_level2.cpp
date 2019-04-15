@@ -11,6 +11,10 @@ using namespace std;
 using namespace sf;
 
 static shared_ptr<Entity> player;
+static shared_ptr<Entity> focus;
+sf::View view1(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
+const float lerp1 = 1.0f;
+
 void Level2Scene::Load() {
   cout << "Scene 2 Load" << endl;
   ls::loadLevelFile("res/level_2.txt", 40.0f);
@@ -20,18 +24,26 @@ void Level2Scene::Load() {
   // Create player
   {
     // *********************************
+
 	  player = makeEntity();
 	  player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
 	  auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::CircleShape>(20.f);
+	  s->setShape<sf::CircleShape>(30.f);
 	  s->getShape().setFillColor(Color::White);
-	  s->getShape().setOrigin(20.0f, 20.0f);
+	  s->getShape().setOrigin(30.f, 30.f);
+
+	  player->addComponent<PlayerPhysicsComponent>(Vector2f(60.f, 60.f));
+
+	 
 
 	 
     // *********************************
     player->addTag("player");
-	player->addComponent<PlayerPhysicsComponent>(Vector2f(35.f, 35.f));
+
   }
+
+  focus = makeEntity();
+  focus->setPosition(player->getPosition());
 
   // Create Enemy
   {
@@ -94,7 +106,115 @@ void Level2Scene::UnLoad() {
   Scene::UnLoad();
 }
 
+bool isbigger1 = false;
+bool issmaller1 = false;
+double cooldown1 = 0;
 void Level2Scene::Update(const double& dt) {
+	if (cooldown1 >= 0) { cooldown1 -= dt; }
+
+	if (cooldown1 <= 0 && Keyboard::isKeyPressed(Keyboard::A)) {
+		cooldown1 = 1.0;
+		if (isbigger1 == false)
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(0.5f, 0.5f);
+			isbigger1 = true;
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(50.f, 50.f));*/
+
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f((30.f), (30.f)));
+			//p->
+
+		   /* auto s = player->addComponent<ShapeComponent>();
+			s->setShape<sf::CircleShape>(float(10.f));
+			s->getShape().setFillColor(Color::White);
+			s->getShape().setOrigin(10.f, 15.f);*/
+			/*player->get_components<ShapeComponent>().swap(s)
+			player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+
+		}
+		else
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(1.0f, 1.0f);
+			isbigger1 = false;
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f(60.f, 60.f));
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(35.f, 35.f));*/
+
+			 /* auto s = player->get_components<ShapeComponent>();
+			  s.resize(1.0f);*/
+			  //player.reset();
+			  /*auto s = player->addComponent<ShapeComponent>();
+			  s->setShape<sf::CircleShape>(float(20.f));
+			  s->getShape().setFillColor(Color::White);
+			  s->getShape().setOrigin(10.f, 15.f);
+
+			  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+		}
+	}
+
+	if (cooldown1 <= 0 && Keyboard::isKeyPressed(Keyboard::Q)) {
+		cooldown1 = 1.0;
+		if (issmaller1 == false)
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(2.0f, 2.0f);
+			issmaller1 = true;
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(50.f, 50.f));*/
+
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f((2.0f*35.f), (2.0f*35.f)));
+			//p->
+
+		   /* auto s = player->addComponent<ShapeComponent>();
+			s->setShape<sf::CircleShape>(float(10.f));
+			s->getShape().setFillColor(Color::White);
+			s->getShape().setOrigin(10.f, 15.f);*/
+			/*player->get_components<ShapeComponent>().swap(s)
+			player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+
+		}
+		else
+		{
+			auto s = player->get_components<ShapeComponent>()[0];
+			s->getShape().setScale(1.0f, 1.0f);
+			issmaller1 = false;
+			auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			p->changeSize(Vector2f(35.f, 35.f));
+
+			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
+			 p->Sizer(Vector2f(35.f, 35.f));*/
+
+			 /* auto s = player->get_components<ShapeComponent>();
+			  s.resize(1.0f);*/
+			  //player.reset();
+			  /*auto s = player->addComponent<ShapeComponent>();
+			  s->setShape<sf::CircleShape>(float(20.f));
+			  s->getShape().setFillColor(Color::White);
+			  s->getShape().setOrigin(10.f, 15.f);
+
+			  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));*/
+		}
+	}
+	//sf::Vector2f viewpos = view.getCenter();
+	sf::Vector2f pos = focus->getPosition();
+
+	pos.x += (player->getPosition().x - pos.x)*lerp1*dt;
+	pos.y += (player->getPosition().y - pos.y)*lerp1*dt;
+
+	focus->setPosition(pos);
+
+	//focus->setPosition(player->getPosition());
+	//view.setCenter(player->getPosition());
+	view1.setCenter(focus->getPosition());
+
   Scene::Update(dt);
   const auto pp = player->getPosition();
   if (ls::getTileAt(pp) == ls::END) {
@@ -105,6 +225,7 @@ void Level2Scene::Update(const double& dt) {
 }
 
 void Level2Scene::Render() {
+	Engine::GetWindow().setView(view1);
   ls::render(Engine::GetWindow());
   Scene::Render();
 }

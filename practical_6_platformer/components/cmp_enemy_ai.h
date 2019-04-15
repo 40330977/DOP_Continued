@@ -5,9 +5,10 @@
 class EnemyAIComponent : public ActorMovementComponent {
 protected:
   sf::Vector2f _direction;
-
+  sf::Vector2f _jumper;
 public:
-  void update(double dt) override;
+	bool isGrounded() const;
+	void update(double dt) override;
 
   explicit EnemyAIComponent(Entity* p);
 

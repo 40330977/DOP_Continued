@@ -1,6 +1,9 @@
 #include "scene_level1.h"
 #include "../components/cmp_player_physics.h"
 #include "../components/cmp_sprite.h"
+#include "../components/cmp_enemy_ai.h"
+#include "../components/cmp_enemy_turret.h"
+#include "../components/cmp_hurt_player.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
@@ -33,7 +36,7 @@ void Level1Scene::Load() {
     s->getShape().setOrigin(30.f, 30.f);
 
     player->addComponent<PlayerPhysicsComponent>(Vector2f(60.f, 60.f));
-
+	player->addTag("player");
   }
 
   focus = makeEntity();
@@ -46,6 +49,28 @@ void Level1Scene::Load() {
   //view.setCenter(sets);
 
   //View::setCenter(player->getPosition());
+
+  // Create Enemy
+  {
+	  auto enemy = makeEntity();
+	  enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
+		  Vector2f(0, 24));
+		  // *********************************
+		  // Add HurtComponent
+	  enemy->addComponent<HurtComponent>();
+	  // Add ShapeComponent, Red 16.f Circle
+	  auto e = enemy->addComponent<ShapeComponent>();
+	  e->setShape<sf::CircleShape>(float(16.f));
+	  e->getShape().setFillColor(Color::Red);
+	  e->getShape().setOrigin(20.f, 15.f);
+
+
+
+	  // Add EnemyAIComponent
+	  enemy->addComponent<EnemyAIComponent>();
+	  //enemy->addComponent<PhysicsComponent>(true,Vector2f(30.f, 30.f));
+	  // *********************************
+  }
 
   // Add physics colliders to level tiles.
   {
@@ -69,6 +94,8 @@ void Level1Scene::Load() {
 		  e->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
 	  }
   }
+
+  
 
   //Simulate long loading times
 //  std::this_thread::sleep_for(std::chrono::milliseconds(3000));
@@ -196,6 +223,9 @@ void Level1Scene::Update(const double& dt) {
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
 	  Engine::ChangeScene((Scene*)&level2);
+  }
+  else if (!player->isAlive()) {
+	  Engine::ChangeScene((Scene*)&level1);
   }
 }
 
