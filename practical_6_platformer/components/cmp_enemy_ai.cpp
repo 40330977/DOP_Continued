@@ -38,7 +38,7 @@ void EnemyAIComponent::update(double dt) {
   const auto pos = _parent->getPosition();
   //Teleport to start if we fall off map.
   if (pos.y > ls::getHeight() * ls::getTileSize()) {
-	  _parent->setPosition(Vector2f(50.f, 0));
+	  _parent->setPosition(Vector2f(50.f, 0));//spawner to be used here eventually to allow enemies to spawn in from the top once they fall off
   }
 
   if (pos.x < 1.0f)
