@@ -5,9 +5,10 @@ using namespace std;
 using namespace sf;
 
 sf::Color colour(160, 160, 160);
+sf::Color colour2(150, 0, 0);
 
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, colour}, {END, Color::Red}, {BLANKED, Color::Transparent} };
+	{WALL, colour2}, {END, Color::Transparent}, {BLANKED, Color::Transparent} };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
   auto it = _colours.find(t);
@@ -165,9 +166,9 @@ void LevelSystem::buildSprites(bool optimise) {
     s->setSize(t.s);
     s->setFillColor(Color::Red);
     s->setFillColor(t.c);
-	if (t.c == colour) {
+	if (t.c == colour2) {
 		s->setOutlineThickness(5);
-		s->setOutlineColor(sf::Color(100, 100, 100));
+		s->setOutlineColor(sf::Color(80, 0, 0));
 	}
     // s->setFillColor(Color(rand()%255,rand()%255,rand()%255));
     _sprites.push_back(move(s));

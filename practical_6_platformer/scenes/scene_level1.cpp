@@ -39,7 +39,7 @@ void Level1Scene::Load() {
 	s->getShape().setOutlineThickness(5);
 	s->getShape().setOutlineColor(sf::Color(100, 100, 100));
 
-    player->addComponent<PlayerPhysicsComponent>(Vector2f(60.f, 60.f));
+    player->addComponent<PlayerPhysicsComponent>(Vector2f(62.f, 62.f));
 	player->addTag("player");
   }
 
@@ -171,7 +171,7 @@ void Level1Scene::Update(const double& dt) {
 			 p->Sizer(Vector2f(50.f, 50.f));*/
 
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f((30.f), (30.f)));
+			p->changeSize(Vector2f((31.f), (31.f)));
 			//p->
 
 		   /* auto s = player->addComponent<ShapeComponent>();
@@ -188,7 +188,7 @@ void Level1Scene::Update(const double& dt) {
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f(60.f, 60.f));
+			p->changeSize(Vector2f(62.f, 62.f));
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(35.f, 35.f));*/
@@ -217,7 +217,7 @@ void Level1Scene::Update(const double& dt) {
 			 p->Sizer(Vector2f(50.f, 50.f));*/
 
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f((2.0f*60.f), (2.0f*60.f)));
+			p->changeSize(Vector2f((2.0f*62.f), (2.0f*62.f)));
 			//p->
 
 		   /* auto s = player->addComponent<ShapeComponent>();
@@ -234,7 +234,7 @@ void Level1Scene::Update(const double& dt) {
 			s->getShape().setScale(1.0f, 1.0f);
 			issmaller = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f(60.f, 60.f));
+			p->changeSize(Vector2f(62.f, 62.f));
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(35.f, 35.f));*/
