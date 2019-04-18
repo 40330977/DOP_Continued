@@ -9,6 +9,9 @@ float gsim = 0;
 float spawner = 0;
 
 void EnemyAIComponent::update(double dt) {
+	auto pl = _player.lock();
+	Vector2f calc = pl->getPosition() - _parent->getPosition();
+	_direction.x = normalize(calc).x;
   auto mov = _direction * (float)(dt * _speed);
   mov.x += _direction.x * 16.f;
   //mov += _direction * 16.f;
@@ -38,12 +41,17 @@ void EnemyAIComponent::update(double dt) {
   const auto pos = _parent->getPosition();
   //Teleport to start if we fall off map.
   if (pos.y > ls::getHeight() * ls::getTileSize()) {
-	  _parent->setPosition(Vector2f(50.f, 0));//spawner to be used here eventually to allow enemies to spawn in from the top once they fall off
+	 // _parent->setForDelete();
+	 // _parent->setPosition(Vector2f(50.f, 50.f));//spawner to be used here eventually to allow enemies to spawn in from the top once they fall off
+	 // _parent->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]));
+	  Vector2f placer = pl->getPosition();
+	  placer.y = 40.0f;
+	  _parent->setPosition(placer);
   }
 
   if (pos.x < 1.0f)
   {
-	  _parent->setPosition(Vector2f(50.f, 0));
+	 // _parent->setPosition(Vector2f(50.f, 50.f));
   }
 }
 
