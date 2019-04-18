@@ -36,6 +36,8 @@ void Level1Scene::Load() {
     s->setShape<sf::CircleShape>(30.f);
     s->getShape().setFillColor(Color::White);
     s->getShape().setOrigin(30.f, 30.f);
+	s->getShape().setOutlineThickness(5);
+	s->getShape().setOutlineColor(sf::Color(100, 100, 100));
 
     player->addComponent<PlayerPhysicsComponent>(Vector2f(60.f, 60.f));
 	player->addTag("player");
@@ -56,7 +58,7 @@ void Level1Scene::Load() {
   for(int i = 0; i< 10; i++)
   {
 	  
-
+	  const float modder = 2.0f;
 	  auto enemy = makeEntity();
 	  enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[i]) +
 		  Vector2f(0, 24));
@@ -65,10 +67,22 @@ void Level1Scene::Load() {
 	  enemy->addComponent<HurtComponent>();
 	  // Add ShapeComponent, Red 16.f Circle
 	  auto e = enemy->addComponent<ShapeComponent>();
-	  e->setShape<sf::RectangleShape>(Vector2f(40.f,40.0f));
+	  if (fmod(i, modder) == 0) {
+
+		  e->setShape<sf::RectangleShape>(Vector2f(40.f, 40.0f));
+	  }
+	  else {
+		  sf::ConvexShape convex;
+		  convex.setPointCount(3);
+		  convex.setPoint(0, sf::Vector2f(0, 0));
+		  convex.setPoint(1, sf::Vector2f(40,0));
+		  convex.setPoint(2, sf::Vector2f(20,40));
+		  e->setShape<sf::ConvexShape>(convex);
+	  }
 	  e->getShape().setFillColor(Color::White);
 	  e->getShape().setOrigin(20.f, 15.f);
-
+	  e->getShape().setOutlineThickness(5);
+	  e->getShape().setOutlineColor(sf::Color(100, 100, 100));
 
 
 	  // Add EnemyAIComponent
@@ -203,7 +217,7 @@ void Level1Scene::Update(const double& dt) {
 			 p->Sizer(Vector2f(50.f, 50.f));*/
 
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f((2.0f*35.f), (2.0f*35.f)));
+			p->changeSize(Vector2f((2.0f*60.f), (2.0f*60.f)));
 			//p->
 
 		   /* auto s = player->addComponent<ShapeComponent>();
@@ -220,7 +234,7 @@ void Level1Scene::Update(const double& dt) {
 			s->getShape().setScale(1.0f, 1.0f);
 			issmaller = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f(35.f, 35.f));
+			p->changeSize(Vector2f(60.f, 60.f));
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(35.f, 35.f));*/

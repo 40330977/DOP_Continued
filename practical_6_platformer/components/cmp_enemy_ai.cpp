@@ -45,7 +45,8 @@ void EnemyAIComponent::update(double dt) {
 	 // _parent->setPosition(Vector2f(50.f, 50.f));//spawner to be used here eventually to allow enemies to spawn in from the top once they fall off
 	 // _parent->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]));
 	  Vector2f placer = pl->getPosition();
-	  placer.y = 40.0f;
+	  placer.y = 0.0f;
+	  //placer.y = _parent->getPosition().y;
 	  _parent->setPosition(placer);
   }
 

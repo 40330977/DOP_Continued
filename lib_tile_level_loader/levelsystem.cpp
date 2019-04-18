@@ -165,6 +165,10 @@ void LevelSystem::buildSprites(bool optimise) {
     s->setSize(t.s);
     s->setFillColor(Color::Red);
     s->setFillColor(t.c);
+	if (t.c == colour) {
+		s->setOutlineThickness(5);
+		s->setOutlineColor(sf::Color(100, 100, 100));
+	}
     // s->setFillColor(Color(rand()%255,rand()%255,rand()%255));
     _sprites.push_back(move(s));
   }
