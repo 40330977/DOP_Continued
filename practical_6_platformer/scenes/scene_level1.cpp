@@ -8,12 +8,21 @@
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
+#include <SFML/Audio.hpp>
+//#include <Sound.hpp>
 
 using namespace std;
 using namespace sf;
 
+
+
 static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
+
+sf::SoundBuffer buffer;
+
+sf::Sound sound;
+
 
 vector<Entity> enemies;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
@@ -28,6 +37,12 @@ void Level1Scene::Load() {
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
 
+  //sf::Music music;
+  buffer.loadFromFile("res/sounds/dopst.wav");
+  sound.setBuffer(buffer);
+  sound.setLoop(true);
+  sound.play();
+  
   // Create player
   {
     player = makeEntity();
@@ -157,6 +172,7 @@ bool isbigger = false;
 bool issmaller = false;
 double cooldown = 0;
 void Level1Scene::Update(const double& dt) {
+	
 	if (cooldown >= 0) { cooldown -= dt; }
 
 	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A)){
