@@ -2,10 +2,16 @@
 #include "system_physics.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Audio.hpp>
+
 
 using namespace std;
 using namespace sf;
 using namespace Physics;
+
+
+
+
 
 bool PlayerPhysicsComponent::isGrounded() const {
   auto touch = getTouching();
@@ -30,6 +36,7 @@ bool PlayerPhysicsComponent::isGrounded() const {
 }
 
 void PlayerPhysicsComponent::update(double dt) {
+	
 
   const auto pos = _parent->getPosition();
 
@@ -79,11 +86,14 @@ void PlayerPhysicsComponent::update(double dt) {
   } else {
     setFriction(0.1f);
   }
+ 
 
   if (Keyboard::isKeyPressed(Keyboard::S))
 	{
+	  
 		_maxVelocity = Vector2f(600.f, 800.f);
 		_groundspeed = 160.0f;
+		
 	}
   else 
   {

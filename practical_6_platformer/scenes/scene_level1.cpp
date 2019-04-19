@@ -20,13 +20,23 @@ static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
 
 sf::SoundBuffer buffer;
+sf::SoundBuffer jumpbuf;
+sf::SoundBuffer lowgbuf;
+sf::SoundBuffer speedbuf;
+sf::SoundBuffer shrinkbuf;
+sf::SoundBuffer growbuf;
 
+sf::Sound jump;
+sf::Sound lowg;
+sf::Sound speed;
 sf::Sound sound;
+sf::Sound shrink;
+sf::Sound grow;
 
 
 vector<Entity> enemies;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
-const float lerp = 1.0f;
+const float lerp = 0.5f;
 
 void Level1Scene::Load() {
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
@@ -42,6 +52,24 @@ void Level1Scene::Load() {
   sound.setBuffer(buffer);
   sound.setLoop(true);
   sound.play();
+  sound.setVolume(50.0f);
+
+  jumpbuf.loadFromFile("res/sounds/jump.wav");
+  jump.setBuffer(jumpbuf);
+
+  lowgbuf.loadFromFile("res/sounds/lowg.wav");
+  lowg.setBuffer(lowgbuf);
+
+  speedbuf.loadFromFile("res/sounds/speed.wav");
+  speed.setBuffer(speedbuf);
+
+  shrinkbuf.loadFromFile("res/sounds/shrink.wav");
+  shrink.setBuffer(shrinkbuf);
+  shrink.setVolume(200.0f);
+
+  growbuf.loadFromFile("res/sounds/grow.wav");
+  grow.setBuffer(growbuf);
+  grow.setVolume(200.0f);
   
   // Create player
   {
@@ -171,14 +199,21 @@ void Level1Scene::UnLoad() {
 bool isbigger = false;
 bool issmaller = false;
 double cooldown = 0;
+double sounddown = 0;
+double sounddown1 = 0;
+double sounddown2 = 0;
 void Level1Scene::Update(const double& dt) {
 	
 	if (cooldown >= 0) { cooldown -= dt; }
+	if (sounddown >= 0) { sounddown -= dt; }
+	if (sounddown1 >= 0) { sounddown1 -= dt; }
+	if (sounddown2 >= 0) { sounddown2 -= dt; }
 
 	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A)){
 		cooldown = 1.0;
 		if (isbigger == false)
 		{
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(0.5f, 0.5f);
 			isbigger = true;
@@ -200,6 +235,7 @@ void Level1Scene::Update(const double& dt) {
 		}
 		else
 		{
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger = false;
@@ -225,6 +261,7 @@ void Level1Scene::Update(const double& dt) {
 		cooldown = 1.0;
 		if (issmaller == false)
 		{
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(2.0f, 2.0f);
 			issmaller = true;
@@ -246,6 +283,7 @@ void Level1Scene::Update(const double& dt) {
 		}
 		else
 		{
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			issmaller = false;
@@ -277,6 +315,19 @@ void Level1Scene::Update(const double& dt) {
 	//focus->setPosition(player->getPosition());
 	//view.setCenter(player->getPosition());
 	view.setCenter(focus->getPosition());
+
+	if (sounddown<=0&&Keyboard::isKeyPressed(Keyboard::Up)) {
+		sounddown = 1;
+		jump.play();
+	}
+	if (sounddown1 <= 0 && Keyboard::isKeyPressed(Keyboard::S)) {
+		sounddown1 = 3;
+		speed.play();
+	}
+	if (sounddown2 <= 0 && Keyboard::isKeyPressed(Keyboard::D)) {
+		sounddown2 = 3;
+		lowg.play();
+	}
 	
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
