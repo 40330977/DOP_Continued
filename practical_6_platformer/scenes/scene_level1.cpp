@@ -18,6 +18,8 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
+static shared_ptr<Entity> snake1;
+static shared_ptr<Entity> snake2;
 
 sf::SoundBuffer buffer;
 sf::SoundBuffer jumpbuf;
@@ -37,6 +39,7 @@ sf::Sound grow;
 vector<Entity> enemies;
 sf::View view(sf::Vector2f(0.0f,0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp = 0.5f;
+const float lerp1 = 1.0f;
 
 void Level1Scene::Load() {
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
@@ -88,14 +91,24 @@ void Level1Scene::Load() {
 
   focus = makeEntity();
   focus->setPosition(player->getPosition());
-  /*auto s = focus->addComponent<ShapeComponent>();
-  s->setShape<sf::CircleShape>(20.f);
-  s->getShape().setFillColor(Color::Red);*/
+  
+  snake1 = makeEntity();
+  snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
+  auto s = snake1->addComponent<ShapeComponent>();
+  s->setShape<sf::CircleShape>(10.f);
+  s->getShape().setFillColor(Color::White);
+  s->getShape().setOrigin(30.f, 30.f);
+  s->getShape().setOutlineThickness(5);
+  s->getShape().setOutlineColor(sf::Color(100, 100, 100));
 
-  //sf::Vector2f sets = focus->getPosition();
-  //view.setCenter(sets);
-
-  //View::setCenter(player->getPosition());
+  snake2 = makeEntity();
+  snake2->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
+  auto w = snake2->addComponent<ShapeComponent>();
+  w->setShape<sf::CircleShape>(10.f);
+  w->getShape().setFillColor(Color::White);
+  w->getShape().setOrigin(30.f, 30.f);
+  w->getShape().setOutlineThickness(5);
+  w->getShape().setOutlineColor(sf::Color(100, 100, 100));
 
   // Create Enemy
   for(int i = 0; i< 10; i++)
@@ -314,7 +327,23 @@ void Level1Scene::Update(const double& dt) {
 	
 	//focus->setPosition(player->getPosition());
 	//view.setCenter(player->getPosition());
+
+
 	view.setCenter(focus->getPosition());
+
+	sf::Vector2f pos1 = snake1->getPosition();
+
+	pos1.x += ((player->getPosition().x-30.0f) - pos1.x)*lerp1*dt;
+	pos1.y += ((player->getPosition().y-30.0f) - pos1.y)*lerp1*dt;
+
+	snake1->setPosition(pos1);
+
+	sf::Vector2f pos2 = snake2->getPosition();
+
+	pos2.x += ((player->getPosition().x-5.0f) - pos2.x)*lerp1*dt;
+	pos2.y += ((player->getPosition().y-5.0f) - pos2.y)*lerp1*dt;
+
+	snake2->setPosition(pos2);
 
 	if (sounddown<=0&&Keyboard::isKeyPressed(Keyboard::Up)) {
 		sounddown = 1;

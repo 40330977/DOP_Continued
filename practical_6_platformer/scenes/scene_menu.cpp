@@ -11,9 +11,12 @@ void MenuScene::Load() {
   cout << "Menu Load \n";
   {
     auto txt = makeEntity();
+	txt->setPosition(Vector2f(500.0f, 500.0f));
     auto t = txt->addComponent<TextComponent>(
-        "Platformer\nPress Space to Start");
+        "Doors of Perception\nPress Space to Start");
+	
   }
+  
   setLoaded(true);
 }
 
@@ -26,3 +29,10 @@ void MenuScene::Update(const double& dt) {
 
   Scene::Update(dt);
 }
+
+void MenuScene::Render()
+{
+
+}
+
+
