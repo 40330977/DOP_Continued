@@ -1,6 +1,8 @@
 #pragma once
 
 #include "engine.h"
+#include "SFML/Window.hpp"
+#include "SFML/Graphics.hpp"
 
 class MenuScene : public Scene {
 public:
