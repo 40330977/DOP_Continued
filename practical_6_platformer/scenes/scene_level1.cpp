@@ -1,4 +1,5 @@
 #include "scene_level1.h"
+#include "../components/cmp_text.h"
 #include "../components/cmp_player_physics.h"
 #include "../components/cmp_sprite.h"
 #include "../components/cmp_enemy_ai.h"
@@ -20,6 +21,7 @@ static shared_ptr<Entity> player;
 static shared_ptr<Entity> focus;
 static shared_ptr<Entity> snake1;
 static shared_ptr<Entity> snake2;
+static shared_ptr<Entity> text;
 
 sf::SoundBuffer buffer;
 sf::SoundBuffer jumpbuf;
@@ -109,6 +111,12 @@ void Level1Scene::Load() {
   w->getShape().setOrigin(30.f, 30.f);
   w->getShape().setOutlineThickness(5);
   w->getShape().setOutlineColor(sf::Color(100, 100, 100));
+
+  text = makeEntity();
+  text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
+  auto t = text->addComponent<TextComponent>("< keep going!");
+  t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+  //t->render();
 
   // Create Enemy
   for(int i = 0; i< 10; i++)
@@ -345,6 +353,10 @@ void Level1Scene::Update(const double& dt) {
 
 	snake2->setPosition(pos2);
 
+	auto t = text->get_components<TextComponent>()[0];
+	t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+	t->render();
+
 	if (sounddown<=0&&Keyboard::isKeyPressed(Keyboard::Up)) {
 		sounddown = 1;
 		jump.play();
@@ -364,6 +376,10 @@ void Level1Scene::Update(const double& dt) {
   }
   else if (!player->isAlive()) {
 	  Engine::ChangeScene((Scene*)&level1);
+  }
+  if (Keyboard::isKeyPressed(Keyboard::P)) {
+	  sound.stop();
+	  Engine::ChangeScene((Scene*)&mainmenu);
   }
 }
 

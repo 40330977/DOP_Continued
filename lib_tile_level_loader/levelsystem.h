@@ -23,7 +23,8 @@ public:
     WALL = 'w',
     ENEMY = 'n',
     WAYPOINT = '+',
-	BLANKED = 'b'
+	BLANKED = 'b',
+	OPT = 'o'
   };
 
   static Tile getTile(sf::Vector2ul);
