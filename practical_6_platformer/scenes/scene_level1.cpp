@@ -33,7 +33,7 @@ sf::SoundBuffer growbuf;
 sf::Sound jump;
 sf::Sound lowg;
 sf::Sound speed;
-sf::Sound sound;
+//sf::Sound sound;
 sf::Sound shrink;
 sf::Sound grow;
 

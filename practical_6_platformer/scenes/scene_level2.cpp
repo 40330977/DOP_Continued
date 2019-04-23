@@ -1,4 +1,5 @@
 #include "scene_level2.h"
+#include "scene_level1.h"
 #include "../components/cmp_enemy_ai.h"
 #include "../components/cmp_enemy_turret.h"
 #include "../components/cmp_hurt_player.h"
@@ -17,7 +18,8 @@ const float lerp1 = 1.0f;
 
 void Level2Scene::Load() {
   cout << "Scene 2 Load" << endl;
-  ls::loadLevelFile("res/level_2.txt", 40.0f);
+  //ls::loadLevelFile("res/level_2.txt", 40.0f);
+  ls::loadLevelFile("res/lvl2.txt", 40.0f);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
 
@@ -47,36 +49,36 @@ void Level2Scene::Load() {
 
   // Create Enemy
   {
-    auto enemy = makeEntity();
-    enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
-                       Vector2f(0, 24));
-    // *********************************
-    // Add HurtComponent
-	enemy->addComponent<HurtComponent>();
-    // Add ShapeComponent, Red 16.f Circle
-	auto s = enemy->addComponent<ShapeComponent>();
-	s->setShape<sf::CircleShape>(float(16.f));
-	s->getShape().setFillColor(Color::Red);
-	s->getShape().setOrigin(20.f, 15.f);
+ //   auto enemy = makeEntity();
+ //   enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
+ //                      Vector2f(0, 24));
+ //   // *********************************
+ //   // Add HurtComponent
+	//enemy->addComponent<HurtComponent>();
+ //   // Add ShapeComponent, Red 16.f Circle
+	//auto s = enemy->addComponent<ShapeComponent>();
+	//s->setShape<sf::CircleShape>(float(16.f));
+	//s->getShape().setFillColor(Color::Red);
+	//s->getShape().setOrigin(20.f, 15.f);
 
 
 
-    // Add EnemyAIComponent
-	enemy->addComponent<EnemyAIComponent>();
-    // *********************************
+ //   // Add EnemyAIComponent
+	//enemy->addComponent<EnemyAIComponent>();
+ //   // *********************************
   }
 
-  // Create Turret
-  {
-    auto turret = makeEntity();
-    turret->setPosition(ls::getTilePosition(ls::findTiles('t')[0]) +
-                        Vector2f(20, 0));
-    auto s = turret->addComponent<ShapeComponent>();
-    s->setShape<sf::CircleShape>(16.f, 3);
-    s->getShape().setFillColor(Color::Red);
-    s->getShape().setOrigin(16.f, 16.f);
-    turret->addComponent<EnemyTurretComponent>();
-  }
+  //// Create Turret
+  //{
+  //  auto turret = makeEntity();
+  //  turret->setPosition(ls::getTilePosition(ls::findTiles('t')[0]) +
+  //                      Vector2f(20, 0));
+  //  auto s = turret->addComponent<ShapeComponent>();
+  //  s->setShape<sf::CircleShape>(16.f, 3);
+  //  s->getShape().setFillColor(Color::Red);
+  //  s->getShape().setOrigin(16.f, 16.f);
+  //  turret->addComponent<EnemyTurretComponent>();
+  //}
 
   // Add physics colliders to level tiles.
   {
@@ -221,6 +223,10 @@ void Level2Scene::Update(const double& dt) {
     Engine::ChangeScene((Scene*)&level3);
   } else if (!player->isAlive()) {
     Engine::ChangeScene((Scene*)&level2);
+  }
+  if (Keyboard::isKeyPressed(Keyboard::P)) {
+	  sound.stop();
+	  Engine::ChangeScene((Scene*)&mainmenu);
   }
 }
 
