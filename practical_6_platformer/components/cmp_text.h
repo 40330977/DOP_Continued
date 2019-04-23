@@ -17,6 +17,8 @@ public:
 
   void SetPosition(sf::Vector2f pos);
 
+  void SetColour(sf::Color col);
+
 protected:
   std::shared_ptr<sf::Font> _font;
   std::string _string;

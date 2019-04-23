@@ -22,3 +22,8 @@ void TextComponent::SetPosition(sf::Vector2f pos)
 {
 	_text.setPosition(pos);
 }
+
+void TextComponent::SetColour(sf::Color col)
+{
+	_text.setColor(col);
+}

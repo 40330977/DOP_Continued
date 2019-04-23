@@ -24,6 +24,8 @@ static shared_ptr<Entity> snake1;
 static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
 static shared_ptr<Entity> text1;
+static shared_ptr<Entity> text2;
+
 //sf::Texture tex;
 
 sf::SoundBuffer buffer00;
@@ -94,17 +96,21 @@ void options::Load()
 
 	text = makeEntity();
 	text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
-	auto t = text->addComponent<TextComponent>("Play");
-	t->SetPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]) + Vector2f(0.0f, -50.0f));
+	auto t = text->addComponent<TextComponent>("Return to Main Menu");
+	t->SetPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]) + Vector2f(-100.0f, -80.0f));
 	t->render();
 
 	text1 = makeEntity();
-	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
-	auto t1 = text1->addComponent<TextComponent>("Options");
+	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]));
+	auto t1 = text1->addComponent<TextComponent>("Full Screen");
 	t1->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]) + Vector2f(0.0f, -50.0f));
 	t1->render();
 
-
+	text2 = makeEntity();
+	text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
+	auto t2 = text2->addComponent<TextComponent>("Windowed");
+	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]) + Vector2f(0.0f, -50.0f));
+	t2->render();
 
 
 	// Create player
@@ -330,9 +336,9 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
-	else if (ls::getTileAt(player->getPosition()) == ls::OPT) {
+	/*else if (ls::getTileAt(player->getPosition()) == ls::OPT) {
 		Engine::ChangeScene((Scene*)&level2);
-	}
+	}*/
 	/*else if (!player->isAlive()) {
 		Engine::ChangeScene((Scene*)&level1);
 	}*/
