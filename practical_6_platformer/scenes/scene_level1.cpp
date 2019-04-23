@@ -114,8 +114,9 @@ void Level1Scene::Load() {
 
   text = makeEntity();
   text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
-  auto t = text->addComponent<TextComponent>("< keep going!");
+  auto t = text->addComponent<TextComponent>("");
   t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+  
   //t->render();
 
   // Create Enemy
@@ -219,16 +220,22 @@ void Level1Scene::UnLoad() {
 
 bool isbigger = false;
 bool issmaller = false;
+bool speach0 = false;
+bool speach1 = false;
 double cooldown = 0;
 double sounddown = 0;
 double sounddown1 = 0;
 double sounddown2 = 0;
+double speakcool0 = 3;
+double speakcool1 = 5;
 void Level1Scene::Update(const double& dt) {
 	
 	if (cooldown >= 0) { cooldown -= dt; }
 	if (sounddown >= 0) { sounddown -= dt; }
 	if (sounddown1 >= 0) { sounddown1 -= dt; }
 	if (sounddown2 >= 0) { sounddown2 -= dt; }
+	if (speakcool0 >= 0) { speakcool0 -= dt; }
+	if (speakcool1 >= 0) { speakcool1 -= dt; }
 
 	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A)){
 		cooldown = 1.0;
@@ -353,9 +360,23 @@ void Level1Scene::Update(const double& dt) {
 
 	snake2->setPosition(pos2);
 
-	auto t = text->get_components<TextComponent>()[0];
-	t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
-	t->render();
+
+	if (speakcool0 <= 0&& speach0 == false) {
+
+		auto t = text->get_components<TextComponent>()[0];
+		t->SetText("< testing testing 123!");
+		t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+		t->render();
+		
+		//speach1 = true;
+		
+	}
+	if(speakcool1 <= 0 /*&& speach1 == true*/){
+		speach0 = true;
+		auto t = text->get_components<TextComponent>()[0];
+		t->SetText("");
+		t->SetPosition(Vector2f(0.0f, 0.0f));
+	}
 
 	if (sounddown<=0&&Keyboard::isKeyPressed(Keyboard::Up)) {
 		sounddown = 1;
