@@ -25,6 +25,7 @@ static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
 static shared_ptr<Entity> text1;
 static shared_ptr<Entity> text2;
+static shared_ptr<Entity> text3;
 
 //sf::Texture tex;
 
@@ -111,6 +112,12 @@ void options::Load()
 	auto t2 = text2->addComponent<TextComponent>("Windowed");
 	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]) + Vector2f(0.0f, -50.0f));
 	t2->render();
+
+	text3 = makeEntity();
+	//text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
+	auto t3 = text3->addComponent<TextComponent>("Instructions:\nP = return to menu\n<-/-> = move left and right\nUp = jump\nQ = grow\nA = shrink\nS = increase speed\nD = lower gravity");
+	t3->SetPosition(Vector2f(500.0f, 300.0f));
+	t3->render();
 
 
 	// Create player
@@ -308,14 +315,14 @@ void options::Update(const double & dt)
 	sf::Vector2f pos1 = snake1->getPosition();
 
 	pos1.x += ((player->getPosition().x - 30.0f) - pos1.x)*lerp01*dt;
-	pos1.y += ((player->getPosition().y - 30.0f) - pos1.y)*lerp01*dt;
+	pos1.y += ((player->getPosition().y - 50.0f) - pos1.y)*lerp01*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
 	pos2.x += ((player->getPosition().x - 5.0f) - pos2.x)*lerp01*dt;
-	pos2.y += ((player->getPosition().y - 5.0f) - pos2.y)*lerp01*dt;
+	pos2.y += ((player->getPosition().y - 30.0f) - pos2.y)*lerp01*dt;
 
 	snake2->setPosition(pos2);
 

@@ -349,14 +349,14 @@ void Level1Scene::Update(const double& dt) {
 	sf::Vector2f pos1 = snake1->getPosition();
 
 	pos1.x += ((player->getPosition().x-30.0f) - pos1.x)*lerp1*dt;
-	pos1.y += ((player->getPosition().y-30.0f) - pos1.y)*lerp1*dt;
+	pos1.y += ((player->getPosition().y-50.0f) - pos1.y)*lerp1*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
 	pos2.x += ((player->getPosition().x-5.0f) - pos2.x)*lerp1*dt;
-	pos2.y += ((player->getPosition().y-5.0f) - pos2.y)*lerp1*dt;
+	pos2.y += ((player->getPosition().y-30.0f) - pos2.y)*lerp1*dt;
 
 	snake2->setPosition(pos2);
 
