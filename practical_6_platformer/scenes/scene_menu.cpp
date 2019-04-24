@@ -10,11 +10,14 @@ using namespace sf;
 void MenuScene::Load() {
   cout << "Menu Load \n";
   {
-
+	  Vector2f winpass = Vector2f(Engine::GetWindow().getView().getSize().x, Engine::GetWindow().getView().getSize().y);
+	  winpass.x /= 2.75;
+	  winpass.y /= 2.5;
     auto txt = makeEntity();
 	txt->setPosition(Vector2f(500.0f, 500.0f));
     auto t = txt->addComponent<TextComponent>(
-        "\n\n\n\n\n\t\t\t\t\t\tDoors of Perception\n\n\n\n\t\t\t\t\t\t\tPress Space to Start");
+        "Doors of Perception\n\n\nPress Space to Start");
+	t->SetPosition(winpass);
 
 	
 	

@@ -22,6 +22,7 @@ static shared_ptr<Entity> focus;
 static shared_ptr<Entity> snake1;
 static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
+static shared_ptr<Texture> snakesprite;
 
 sf::SoundBuffer buffer;
 sf::SoundBuffer jumpbuf;
@@ -51,6 +52,10 @@ void Level1Scene::Load() {
   
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
+
+  /*if (!snakesprite->loadFromFile("res/Images/snake.png")) {
+	  cerr << "Failed to load spritesheet!" << std::endl;
+  }*/
 
   //sf::Music music;
   buffer.loadFromFile("res/sounds/dopst.wav");
@@ -96,6 +101,8 @@ void Level1Scene::Load() {
   
   snake1 = makeEntity();
   snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
+  /*auto s1 = snake1->addComponent<SpriteComponent>();
+  s1->setTexure(snakesprite);*/
   auto s = snake1->addComponent<ShapeComponent>();
   s->setShape<sf::CircleShape>(10.f);
   s->getShape().setFillColor(Color::White);
