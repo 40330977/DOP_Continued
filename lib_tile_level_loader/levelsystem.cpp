@@ -8,7 +8,7 @@ sf::Color colour(160, 160, 160);
 sf::Color colour2(150, 0, 0);
 
 std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{WALL, colour2}, {END, Color::Transparent}, {BLANKED, Color::Transparent},{OPT, Color::Transparent} };
+	{WALL, colour2}, {END, Color::Transparent}, {BLANKED, Color::Transparent},{OPT, Color::Transparent},{FULL, Color::Transparent},{WIN, Color::Transparent} };
 
 sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
   auto it = _colours.find(t);

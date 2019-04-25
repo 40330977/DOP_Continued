@@ -24,7 +24,9 @@ public:
     ENEMY = 'n',
     WAYPOINT = '+',
 	BLANKED = 'b',
-	OPT = 'o'
+	OPT = 'o',
+	FULL = 'f',
+	WIN = 'i'
   };
 
   static Tile getTile(sf::Vector2ul);

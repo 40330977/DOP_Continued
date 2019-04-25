@@ -46,13 +46,16 @@ sf::Sound grow00;
 sf::View view00(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp0 = 0.5f;
 const float lerp01 = 1.0f;
-
+bool full1 = false;
+Vector2f fullcheck;
+Vector2f wincheck;
 void options::Load()
 {
+	
 	ls::loadLevelFile("res/optionsmenu.txt", 40.0f);
 
-	auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-	ls::setOffset(Vector2f(0, ho));
+	//auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+	//ls::setOffset(Vector2f(0, ho));
 
 	/*buffer0.loadFromFile("res/sounds/dopst.wav");
 	sound0.setBuffer(buffer0);
@@ -75,6 +78,9 @@ void options::Load()
 		//playt.setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]) /*+ Vector2f(0.0f, -10.0f)*/);
 		//playt.setString("Play");
 		//Engine::GetWindow().draw(playt);
+
+	//fullcheck = ls::getTilePosition(ls::findTiles(ls::FULL)[0]);
+	//wincheck = ls::getTilePosition(ls::findTiles(ls::WIN)[0]);
 
 	jumpbuf00.loadFromFile("res/sounds/jump.wav");
 	jump00.setBuffer(jumpbuf00);
@@ -338,10 +344,24 @@ void options::Update(const double & dt)
 		sounddown020 = 3;
 		lowg00.play();
 	}
+	/*if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
+
+		Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "", sf::Style::Fullscreen);
+	}*/
 
 	Scene::Update(dt);
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
+	}
+	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false) {
+		Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "Doors of Perception", sf::Style::Fullscreen);
+		full1 = true;
+		//Engine::fullscreen(full, 1280, 720, "Doors of Perception");
+	}
+	if (/*player->getPosition()==wincheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==true) {
+		
+		Engine::GetWindow().create(VideoMode(1280, 720), "Doors of Perception");
+		full1 = false;
 	}
 	/*else if (ls::getTileAt(player->getPosition()) == ls::OPT) {
 		Engine::ChangeScene((Scene*)&level2);
@@ -349,11 +369,14 @@ void options::Update(const double & dt)
 	/*else if (!player->isAlive()) {
 		Engine::ChangeScene((Scene*)&level1);
 	}*/
+	//Engine::GetWindow().close();
+	
 
 }
 
 void options::Render()
 {
+	
 	Engine::GetWindow().setView(view00);
 	ls::render(Engine::GetWindow());
 	Scene::Render();

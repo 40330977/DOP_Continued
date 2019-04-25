@@ -8,6 +8,7 @@ using namespace std;
 using namespace sf;
 
 void MenuScene::Load() {
+	
   cout << "Menu Load \n";
   {
 	  Vector2f winpass = Vector2f(Engine::GetWindow().getView().getSize().x, Engine::GetWindow().getView().getSize().y);
@@ -48,6 +49,7 @@ void MenuScene::Update(const double& dt) {
 
   if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
     Engine::ChangeScene(&mainmenu);
+	//Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "", sf::Style::Fullscreen);
   }
 
   Scene::Update(dt);

@@ -19,9 +19,9 @@ const float lerp1 = 1.0f;
 void Level2Scene::Load() {
   cout << "Scene 2 Load" << endl;
   //ls::loadLevelFile("res/level_2.txt", 40.0f);
-  ls::loadLevelFile("res/lvl2.txt", 40.0f);
-  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  ls::setOffset(Vector2f(0, ho));
+  ls::loadLevelFile("res/lvl2b.txt", 40.0f);
+  //auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+  //ls::setOffset(Vector2f(0, ho));
 
   // Create player
   {
@@ -172,7 +172,7 @@ void Level2Scene::Update(const double& dt) {
 			 p->Sizer(Vector2f(50.f, 50.f));*/
 
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
-			p->changeSize(Vector2f((2.0f*35.f), (2.0f*35.f)));
+			p->changeSize(Vector2f((2.0f*62.f), (2.0f*62.f)));
 			//p->
 
 		   /* auto s = player->addComponent<ShapeComponent>();

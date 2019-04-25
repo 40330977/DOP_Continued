@@ -19,4 +19,5 @@ extern Level2Scene level2;
 extern Level3Scene level3;
 
 extern sf::Sound sound;
+//extern bool full;
 

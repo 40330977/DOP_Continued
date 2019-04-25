@@ -10,6 +10,9 @@
 #include <iostream>
 #include <thread>
 #include <SFML/Audio.hpp>
+#include <system_resources.h>
+
+
 //#include <Sound.hpp>
 
 using namespace std;
@@ -50,18 +53,21 @@ void Level1Scene::Load() {
   //ls::loadLevelFile("res/level_1.txt", 40.0f);
   ls::loadLevelFile("res/lvl1.txt", 40.0f);
   
-  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  ls::setOffset(Vector2f(0, ho));
+  //auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+  //ls::setOffset(Vector2f(0, ho));
 
-  /*if (!snakesprite->loadFromFile("res/Images/snake.png")) {
+
+
+ /* if (!snakesprite->loadFromFile("res/Images/snake1.png")) {
 	  cerr << "Failed to load spritesheet!" << std::endl;
   }*/
+  //snakesprite = *Resources::load<shared_ptr<Texture>>("snake.png");
 
   //sf::Music music;
   buffer.loadFromFile("res/sounds/dopst.wav");
   sound.setBuffer(buffer);
   sound.setLoop(true);
-  sound.play();
+  //sound.play();
   sound.setVolume(50.0f);
 
   jumpbuf.loadFromFile("res/sounds/jump.wav");
@@ -412,7 +418,9 @@ void Level1Scene::Update(const double& dt) {
 }
 
 void Level1Scene::Render() {
+	sf::Style::Fullscreen;
 	Engine::GetWindow().setView(view);
+	//Engine::GetWindow(sf::VideoMode(SEV_WindowWidth, SEV_WindowHeight, 32), SEV_WindowTitle, sf::Style::Fullscreen);
   ls::render(Engine::GetWindow());
   Scene::Render();
 }

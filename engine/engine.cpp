@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 
+
 using namespace sf;
 using namespace std;
 Scene* Engine::_activeScene = nullptr;
@@ -17,6 +18,7 @@ static bool loading = false;
 static float loadingspinner = 0.f;
 static float loadingTime;
 static RenderWindow* _window;
+bool full = false;
 
 void Loading_update(float dt, const Scene* const scn) {
   //  cout << "Eng: Loading Screen\n";
@@ -81,7 +83,7 @@ void Engine::Render(RenderWindow& window) {
 }
 
 void Engine::Start(unsigned int width, unsigned int height,
-                   const std::string& gameName, Scene* scn) {
+                   const std::string& gameName, const std::string& style, Scene* scn) {
   RenderWindow window(VideoMode(width, height), gameName);
   _gameName = gameName;
   _window = &window;
@@ -98,6 +100,14 @@ void Engine::Start(unsigned int width, unsigned int height,
     if (Keyboard::isKeyPressed(Keyboard::Escape)) {
       window.close();
     }
+	/*if (Keyboard::isKeyPressed(Keyboard::V)&&full == false) {
+		window.create(sf::VideoMode::getFullscreenModes()[0], gameName, sf::Style::Fullscreen);
+		full = true;
+	}
+	if (Keyboard::isKeyPressed(Keyboard::V) && full == true) {
+		window.create(VideoMode(width, height), gameName, sf::Style::Default);
+		full = false;
+	}*/
 
     window.clear();
     Update();
@@ -120,6 +130,18 @@ std::shared_ptr<Entity> Scene::makeEntity() {
 }
 
 void Engine::setVsync(bool b) { _window->setVerticalSyncEnabled(b); }
+
+void Engine::fullscreen(bool full,unsigned int width, unsigned int height,
+                    const std::string& gameName)
+{
+	if (full == true) {
+		
+		_window->create(sf::VideoMode::getFullscreenModes()[0], "", sf::Style::Fullscreen);
+	}
+	else{
+		_window->create(VideoMode(width, height), gameName);
+	}
+}
 
 void Engine::ChangeScene(Scene* s) {
   cout << "Eng: changing scene: " << s << endl;
@@ -174,6 +196,7 @@ void Scene::LoadAsync() { _loaded_future = std::async(&Scene::Load, this); }
 sf::Vector2u Engine::getWindowSize() { return _window->getSize(); }
 
 sf::RenderWindow& Engine::GetWindow() { return *_window; }
+
 
 namespace timing {
 // Return time since Epoc

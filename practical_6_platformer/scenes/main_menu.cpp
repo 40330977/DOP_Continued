@@ -51,8 +51,8 @@ void Main_menu::Load()
 {
 	ls::loadLevelFile("res/mainmenu.txt", 40.0f);
 
-	auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-	ls::setOffset(Vector2f(0, ho));
+	//auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+	//ls::setOffset(Vector2f(0, ho));
 
 	/*buffer0.loadFromFile("res/sounds/dopst.wav");
 	sound0.setBuffer(buffer0);
