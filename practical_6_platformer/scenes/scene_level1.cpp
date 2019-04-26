@@ -26,6 +26,7 @@ static shared_ptr<Entity> snake1;
 static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
 static shared_ptr<Texture> snakesprite;
+static shared_ptr<Texture> snakesprite1;
 
 sf::SoundBuffer buffer;
 sf::SoundBuffer jumpbuf;
@@ -61,7 +62,8 @@ void Level1Scene::Load() {
  /* if (!snakesprite->loadFromFile("res/Images/snake1.png")) {
 	  cerr << "Failed to load spritesheet!" << std::endl;
   }*/
-  //snakesprite = *Resources::load<shared_ptr<Texture>>("snake.png");
+  snakesprite = Resources::get<Texture>("snake1.png");
+  snakesprite1 = Resources::get<Texture>("snake2.png");
 
   //sf::Music music;
   buffer.loadFromFile("res/sounds/dopst.wav");
@@ -107,23 +109,25 @@ void Level1Scene::Load() {
   
   snake1 = makeEntity();
   snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-  /*auto s1 = snake1->addComponent<SpriteComponent>();
-  s1->setTexure(snakesprite);*/
-  auto s = snake1->addComponent<ShapeComponent>();
-  s->setShape<sf::CircleShape>(10.f);
+  auto s1 = snake1->addComponent<SpriteComponent>();
+  s1->setTexure(snakesprite);
+  //auto s = snake1->addComponent<ShapeComponent>();
+  /*s->setShape<sf::CircleShape>(10.f);
   s->getShape().setFillColor(Color::White);
   s->getShape().setOrigin(30.f, 30.f);
   s->getShape().setOutlineThickness(5);
-  s->getShape().setOutlineColor(sf::Color(100, 100, 100));
+  s->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
   snake2 = makeEntity();
   snake2->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-  auto w = snake2->addComponent<ShapeComponent>();
+  auto s2 = snake2->addComponent<SpriteComponent>();
+  s2->setTexure(snakesprite1);
+  /*auto w = snake2->addComponent<ShapeComponent>();
   w->setShape<sf::CircleShape>(10.f);
   w->getShape().setFillColor(Color::White);
   w->getShape().setOrigin(30.f, 30.f);
   w->getShape().setOutlineThickness(5);
-  w->getShape().setOutlineColor(sf::Color(100, 100, 100));
+  w->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
   text = makeEntity();
   text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
@@ -361,15 +365,15 @@ void Level1Scene::Update(const double& dt) {
 
 	sf::Vector2f pos1 = snake1->getPosition();
 
-	pos1.x += ((player->getPosition().x-30.0f) - pos1.x)*lerp1*dt;
-	pos1.y += ((player->getPosition().y-50.0f) - pos1.y)*lerp1*dt;
+	pos1.x += ((player->getPosition().x-80.0f) - pos1.x)*lerp1*dt;
+	pos1.y += ((player->getPosition().y-80.0f) - pos1.y)*lerp1*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
-	pos2.x += ((player->getPosition().x-5.0f) - pos2.x)*lerp1*dt;
-	pos2.y += ((player->getPosition().y-30.0f) - pos2.y)*lerp1*dt;
+	pos2.x += ((player->getPosition().x-80.0f) - pos2.x)*lerp1*dt;
+	pos2.y += ((player->getPosition().y-80.0f) - pos2.y)*lerp1*dt;
 
 	snake2->setPosition(pos2);
 
@@ -378,7 +382,7 @@ void Level1Scene::Update(const double& dt) {
 
 		auto t = text->get_components<TextComponent>()[0];
 		t->SetText("< testing testing 123!");
-		t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(95.0f, -18.0f));
 		t->render();
 		
 		//speach1 = true;
