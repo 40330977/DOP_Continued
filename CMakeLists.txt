@@ -51,40 +51,18 @@ add_library(lib_ecm STATIC ${SOURCE_FILES})
 target_include_directories(lib_ecm INTERFACE "${CMAKE_SOURCE_DIR}/lib_ecm" )
 target_link_libraries(lib_ecm PRIVATE lib_maths)
 
-#### Practical 1 ####
-file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
-add_executable(PRACTICAL_1 ${SOURCES})
-target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
-target_link_libraries(PRACTICAL_1 sfml-graphics)
 
-## Space invaders
-file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
-add_executable(2_INVADERS ${SOURCES} )
-target_include_directories(2_INVADERS SYSTEM PRIVATE ${SFML_INCS})
-target_link_libraries(2_INVADERS sfml-graphics)
-
-#### Practical 3 ####
-file(GLOB_RECURSE SOURCES practical_3/*.cpp practical_3/*.h)
-add_executable(PRACTICAL_3 ${SOURCES})
-target_include_directories(PRACTICAL_3 PRIVATE ${SFML_INCS})
-target_link_libraries(PRACTICAL_3 lib_tile_level_loader sfml-graphics)
-
-#### Practical 4 ####
-file(GLOB_RECURSE SOURCES practical_4/*.cpp practical_4/*.h)
-add_executable(PRACTICAL_4 ${SOURCES})
-target_include_directories(PRACTICAL_4 PRIVATE ${SFML_INCS})
-target_link_libraries(PRACTICAL_4 lib_tile_level_loader sfml-graphics)
 
 ## 6 - Platformer
-file(GLOB_RECURSE SOURCES practical_6_platformer/*.cpp practical_6_platformer/*.h)
-file(GLOB_RECURSE CMPNTS practical_6_platformer/components/*.cpp practical_6_platformer/components/*.h)
-file(GLOB_RECURSE SCENES practical_6_platformer/scenes/*.cpp practical_6_platformer/scenes/*.h)
-add_executable(PRACTICAL_6_PLATFORMER ${SOURCES} ${RESOURCE_FILES})
+file(GLOB_RECURSE SOURCES Doors_of_Perception/*.cpp Doors_of_Perception/*.h)
+file(GLOB_RECURSE CMPNTS Doors_of_Perception/components/*.cpp Doors_of_Perception/components/*.h)
+file(GLOB_RECURSE SCENES Doors_of_Perception/scenes/*.cpp Doors_of_Perception/scenes/*.h)
+add_executable(Doors_of_Perception ${SOURCES} ${RESOURCE_FILES})
 source_group("components" FILES ${CMPNTS})
 source_group("resources" FILES ${RESOURCE_FILES})
-#target_include_directories(PRACTICAL_6_PLATFORMER SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
-target_link_libraries(PRACTICAL_6_PLATFORMER lib_engine lib_maths)
-set(EXECUTABLES ${EXECUTABLES} PRACTICAL_6_PLATFORMER)
+#target_include_directories(Doors_of_Perception SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
+target_link_libraries(Doors_of_Perception lib_engine lib_maths)
+set(EXECUTABLES ${EXECUTABLES} Doors_of_Perception)
 
 
 
