@@ -26,22 +26,24 @@ static shared_ptr<Entity> text;
 static shared_ptr<Entity> text1;
 static shared_ptr<Entity> text2;
 static shared_ptr<Entity> text3;
+static shared_ptr<Texture> snakesprite;
+static shared_ptr<Texture> snakesprite1;
 
 //sf::Texture tex;
 
-sf::SoundBuffer buffer00;
-sf::SoundBuffer jumpbuf00;
-sf::SoundBuffer lowgbuf00;
-sf::SoundBuffer speedbuf00;
-sf::SoundBuffer shrinkbuf00;
-sf::SoundBuffer growbuf00;
-
-sf::Sound jump00;
-sf::Sound lowg00;
-sf::Sound speed00;
-sf::Sound sound00;
-sf::Sound shrink00;
-sf::Sound grow00;
+//sf::SoundBuffer buffer00;
+//sf::SoundBuffer jumpbuf00;
+//sf::SoundBuffer lowgbuf00;
+//sf::SoundBuffer speedbuf00;
+//sf::SoundBuffer shrinkbuf00;
+//sf::SoundBuffer growbuf00;
+//
+//sf::Sound jump00;
+//sf::Sound lowg00;
+//sf::Sound speed00;
+//sf::Sound sound00;
+//sf::Sound shrink00;
+//sf::Sound grow00;
 
 sf::View view00(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp0 = 0.5f;
@@ -82,7 +84,7 @@ void options::Load()
 	//fullcheck = ls::getTilePosition(ls::findTiles(ls::FULL)[0]);
 	//wincheck = ls::getTilePosition(ls::findTiles(ls::WIN)[0]);
 
-	jumpbuf00.loadFromFile("res/sounds/jump.wav");
+	/*jumpbuf00.loadFromFile("res/sounds/jump.wav");
 	jump00.setBuffer(jumpbuf00);
 
 	lowgbuf00.loadFromFile("res/sounds/lowg.wav");
@@ -97,7 +99,7 @@ void options::Load()
 
 	growbuf00.loadFromFile("res/sounds/grow.wav");
 	grow00.setBuffer(growbuf00);
-	grow00.setVolume(200.0f);
+	grow00.setVolume(200.0f);*/
 
 
 
@@ -125,7 +127,8 @@ void options::Load()
 	t3->SetPosition(Vector2f(500.0f, 300.0f));
 	t3->render();
 
-
+	snakesprite = Resources::get<Texture>("snake1.png");
+	snakesprite1 = Resources::get<Texture>("snake2.png");
 	// Create player
 	{
 		player = makeEntity();
@@ -146,21 +149,25 @@ void options::Load()
 
 	snake1 = makeEntity();
 	snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-	auto s = snake1->addComponent<ShapeComponent>();
+	auto s1 = snake1->addComponent<SpriteComponent>();
+	s1->setTexure(snakesprite);
+	/*auto s = snake1->addComponent<ShapeComponent>();
 	s->setShape<sf::CircleShape>(10.f);
 	s->getShape().setFillColor(Color::White);
 	s->getShape().setOrigin(30.f, 30.f);
 	s->getShape().setOutlineThickness(5);
-	s->getShape().setOutlineColor(sf::Color(100, 100, 100));
+	s->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
 	snake2 = makeEntity();
 	snake2->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-	auto w = snake2->addComponent<ShapeComponent>();
+	auto s2 = snake2->addComponent<SpriteComponent>();
+	s2->setTexure(snakesprite1);
+	/*auto w = snake2->addComponent<ShapeComponent>();
 	w->setShape<sf::CircleShape>(10.f);
 	w->getShape().setFillColor(Color::White);
 	w->getShape().setOrigin(30.f, 30.f);
 	w->getShape().setOutlineThickness(5);
-	w->getShape().setOutlineColor(sf::Color(100, 100, 100));
+	w->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
 	{
 		auto walls = ls::findTiles(ls::WALL);
@@ -204,16 +211,17 @@ double sounddown010 = 0;
 double sounddown020 = 0;
 void options::Update(const double & dt)
 {
+	controls.update(dt);
 	if (cooldown00 >= 0) { cooldown00 -= dt; }
 	if (sounddown00 >= 0) { sounddown00 -= dt; }
 	if (sounddown010 >= 0) { sounddown010 -= dt; }
 	if (sounddown020 >= 0) { sounddown020 -= dt; }
 
-	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::A)) {
+	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::A) || cooldown00 <= 0 && controls.triggers() > 10) {
 		cooldown00 = 1.0;
 		if (isbigger00 == false)
 		{
-			shrink00.play();
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(0.5f, 0.5f);
 			isbigger00 = true;
@@ -235,7 +243,7 @@ void options::Update(const double & dt)
 		}
 		else
 		{
-			grow00.play();
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger00 = false;
@@ -257,11 +265,11 @@ void options::Update(const double & dt)
 		}
 	}
 
-	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Q)) {
+	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown00 <= 0 && controls.triggers() < -10) {
 		cooldown00 = 1.0;
 		if (issmaller00 == false)
 		{
-			grow00.play();
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(2.0f, 2.0f);
 			issmaller00 = true;
@@ -283,7 +291,7 @@ void options::Update(const double & dt)
 		}
 		else
 		{
-			shrink00.play();
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			issmaller00 = false;
@@ -320,29 +328,29 @@ void options::Update(const double & dt)
 
 	sf::Vector2f pos1 = snake1->getPosition();
 
-	pos1.x += ((player->getPosition().x - 30.0f) - pos1.x)*lerp01*dt;
-	pos1.y += ((player->getPosition().y - 50.0f) - pos1.y)*lerp01*dt;
+	pos1.x += ((player->getPosition().x - 90.0f) - pos1.x)*lerp01*dt;
+	pos1.y += ((player->getPosition().y - 90.0f) - pos1.y)*lerp01*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
-	pos2.x += ((player->getPosition().x - 5.0f) - pos2.x)*lerp01*dt;
-	pos2.y += ((player->getPosition().y - 30.0f) - pos2.y)*lerp01*dt;
+	pos2.x += ((player->getPosition().x - 90.0f) - pos2.x)*lerp01*dt;
+	pos2.y += ((player->getPosition().y - 90.0f) - pos2.y)*lerp01*dt;
 
 	snake2->setPosition(pos2);
 
-	if (sounddown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Up)) {
+	if (sounddown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Up) || sounddown00 <= 0 && controls.jump() == true) {
 		sounddown00 = 1;
-		jump00.play();
+		jump.play();
 	}
-	if (sounddown010 <= 0 && Keyboard::isKeyPressed(Keyboard::S)) {
+	if (sounddown010 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown010 <= 0 && controls.speed() == true) {
 		sounddown010 = 3;
-		speed00.play();
+		speed.play();
 	}
-	if (sounddown020 <= 0 && Keyboard::isKeyPressed(Keyboard::D)) {
+	if (sounddown020 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown020 <= 0 && controls.lowg() == true) {
 		sounddown020 = 3;
-		lowg00.play();
+		lowg.play();
 	}
 	/*if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
 

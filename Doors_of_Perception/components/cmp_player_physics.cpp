@@ -48,13 +48,13 @@ void PlayerPhysicsComponent::update(double dt) {
   }
 
   if (Keyboard::isKeyPressed(Keyboard::Left) ||
-      Keyboard::isKeyPressed(Keyboard::Right) || controls.stick()>10||controls.stick()<-10) {
+      Keyboard::isKeyPressed(Keyboard::Right) || controls.stick()>20||controls.stick()<-20) {
     // Moving Either Left or Right
 	  int test = controls.stick();
-    if (Keyboard::isKeyPressed(Keyboard::Right) || controls.stick() > 10) {
+    if (Keyboard::isKeyPressed(Keyboard::Right) || controls.stick() > 20) {
       if (getVelocity().x < _maxVelocity.x)
         impulse({(float)(dt * _groundspeed), 0});
-    } else if(Keyboard::isKeyPressed(Keyboard::Left)|| controls.stick() < -10){
+    } else if(Keyboard::isKeyPressed(Keyboard::Left)|| controls.stick() < -20){
       if (getVelocity().x > -_maxVelocity.x)
         impulse({-(float)(dt * _groundspeed), 0});
     }

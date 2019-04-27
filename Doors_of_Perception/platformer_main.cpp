@@ -15,9 +15,23 @@ Level3Scene level3;
 sf::Sound sound;
 //bool full;
 
+sf::SoundBuffer buffer;
+sf::SoundBuffer jumpbuf;
+sf::SoundBuffer lowgbuf;
+sf::SoundBuffer speedbuf;
+sf::SoundBuffer shrinkbuf;
+sf::SoundBuffer growbuf;
+
+sf::Sound jump;
+sf::Sound lowg;
+sf::Sound speed;
+//sf::Sound sound;
+sf::Sound shrink;
+sf::Sound grow;
+
 Controls controls;
 
-
+  
 
 //sf::Style:Fullscreen
 int main() {

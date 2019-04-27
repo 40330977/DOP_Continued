@@ -28,19 +28,7 @@ static shared_ptr<Entity> text;
 static shared_ptr<Texture> snakesprite;
 static shared_ptr<Texture> snakesprite1;
 
-sf::SoundBuffer buffer;
-sf::SoundBuffer jumpbuf;
-sf::SoundBuffer lowgbuf;
-sf::SoundBuffer speedbuf;
-sf::SoundBuffer shrinkbuf;
-sf::SoundBuffer growbuf;
 
-sf::Sound jump;
-sf::Sound lowg;
-sf::Sound speed;
-//sf::Sound sound;
-sf::Sound shrink;
-sf::Sound grow;
 
 
 vector<Entity> enemies;
@@ -65,29 +53,7 @@ void Level1Scene::Load() {
   snakesprite = Resources::get<Texture>("snake1.png");
   snakesprite1 = Resources::get<Texture>("snake2.png");
 
-  //sf::Music music;
-  buffer.loadFromFile("res/sounds/dopst.wav");
-  sound.setBuffer(buffer);
-  sound.setLoop(true);
-  //sound.play();
-  sound.setVolume(50.0f);
-
-  jumpbuf.loadFromFile("res/sounds/jump.wav");
-  jump.setBuffer(jumpbuf);
-
-  lowgbuf.loadFromFile("res/sounds/lowg.wav");
-  lowg.setBuffer(lowgbuf);
-
-  speedbuf.loadFromFile("res/sounds/speed.wav");
-  speed.setBuffer(speedbuf);
-
-  shrinkbuf.loadFromFile("res/sounds/shrink.wav");
-  shrink.setBuffer(shrinkbuf);
-  shrink.setVolume(200.0f);
-
-  growbuf.loadFromFile("res/sounds/grow.wav");
-  grow.setBuffer(growbuf);
-  grow.setVolume(200.0f);
+  sound.play();
   
   // Create player
   {
@@ -254,7 +220,7 @@ void Level1Scene::Update(const double& dt) {
 	if (speakcool0 >= 0) { speakcool0 -= dt; }
 	if (speakcool1 >= 0) { speakcool1 -= dt; }
 
-	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A)){
+	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A) || cooldown <= 0 && controls.triggers() > 10){
 		cooldown = 1.0;
 		if (isbigger == false)
 		{
@@ -302,7 +268,7 @@ void Level1Scene::Update(const double& dt) {
 		}
 	}
 
-	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::Q)) {
+	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown <= 0 && controls.triggers() < -10) {
 		cooldown = 1.0;
 		if (issmaller == false)
 		{
@@ -365,15 +331,15 @@ void Level1Scene::Update(const double& dt) {
 
 	sf::Vector2f pos1 = snake1->getPosition();
 
-	pos1.x += ((player->getPosition().x-80.0f) - pos1.x)*lerp1*dt;
-	pos1.y += ((player->getPosition().y-80.0f) - pos1.y)*lerp1*dt;
+	pos1.x += ((player->getPosition().x-90.0f) - pos1.x)*lerp1*dt;
+	pos1.y += ((player->getPosition().y-90.0f) - pos1.y)*lerp1*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
-	pos2.x += ((player->getPosition().x-80.0f) - pos2.x)*lerp1*dt;
-	pos2.y += ((player->getPosition().y-80.0f) - pos2.y)*lerp1*dt;
+	pos2.x += ((player->getPosition().x-90.0f) - pos2.x)*lerp1*dt;
+	pos2.y += ((player->getPosition().y-90.0f) - pos2.y)*lerp1*dt;
 
 	snake2->setPosition(pos2);
 
@@ -382,7 +348,7 @@ void Level1Scene::Update(const double& dt) {
 
 		auto t = text->get_components<TextComponent>()[0];
 		t->SetText("< testing testing 123!");
-		t->SetPosition(snake1->getPosition() + Vector2f(95.0f, -18.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		t->render();
 		
 		//speach1 = true;
@@ -395,19 +361,19 @@ void Level1Scene::Update(const double& dt) {
 		t->SetPosition(Vector2f(0.0f, 0.0f));
 	}
 
-	if (sounddown<=0&&Keyboard::isKeyPressed(Keyboard::Up)) {
+	if (sounddown <= 0 && Keyboard::isKeyPressed(Keyboard::Up) || sounddown <= 0 && controls.jump() == true) {
 		sounddown = 1;
 		jump.play();
 	}
-	if (sounddown1 <= 0 && Keyboard::isKeyPressed(Keyboard::S)) {
+	if (sounddown1 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown1 <= 0 && controls.speed() == true) {
 		sounddown1 = 3;
 		speed.play();
 	}
-	if (sounddown2 <= 0 && Keyboard::isKeyPressed(Keyboard::D)) {
+	if (sounddown2 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown2 <= 0 && controls.lowg() == true) {
 		sounddown2 = 3;
 		lowg.play();
 	}
-	
+
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
 	  Engine::ChangeScene((Scene*)&level2);
@@ -415,7 +381,7 @@ void Level1Scene::Update(const double& dt) {
   else if (!player->isAlive()) {
 	  Engine::ChangeScene((Scene*)&level1);
   }
-  if (Keyboard::isKeyPressed(Keyboard::P)) {
+  if (Keyboard::isKeyPressed(Keyboard::P)||controls.start()==true) {
 	  sound.stop();
 	  Engine::ChangeScene((Scene*)&mainmenu);
   }

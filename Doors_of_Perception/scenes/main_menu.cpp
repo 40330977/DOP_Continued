@@ -27,21 +27,23 @@ static shared_ptr<Entity> text1;
 static shared_ptr<Entity> text2;
 static shared_ptr<Entity> snakespeak1;
 static shared_ptr<Entity> snakespeak2;
+static shared_ptr<Texture> snakesprite;
+static shared_ptr<Texture> snakesprite1;
 //sf::Texture tex;
 
-sf::SoundBuffer buffer0;
-sf::SoundBuffer jumpbuf0;
-sf::SoundBuffer lowgbuf0;
-sf::SoundBuffer speedbuf0;
-sf::SoundBuffer shrinkbuf0;
-sf::SoundBuffer growbuf0;
-
-sf::Sound jump0;
-sf::Sound lowg0;
-sf::Sound speed0;
-sf::Sound sound0;
-sf::Sound shrink0;
-sf::Sound grow0;
+//sf::SoundBuffer buffer0;
+//sf::SoundBuffer jumpbuf0;
+//sf::SoundBuffer lowgbuf0;
+//sf::SoundBuffer speedbuf0;
+//sf::SoundBuffer shrinkbuf0;
+//sf::SoundBuffer growbuf0;
+//
+//sf::Sound jump0;
+//sf::Sound lowg0;
+//sf::Sound speed0;
+//sf::Sound sound0;
+//sf::Sound shrink0;
+//sf::Sound grow0;
 
 sf::View view0(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp0 = 0.5f;
@@ -76,7 +78,10 @@ void Main_menu::Load()
 	//playt.setString("Play");
 	//Engine::GetWindow().draw(playt);
 
-	jumpbuf0.loadFromFile("res/sounds/jump.wav");
+	snakesprite = Resources::get<Texture>("snake1.png");
+	snakesprite1 = Resources::get<Texture>("snake2.png");
+
+	/*jumpbuf0.loadFromFile("res/sounds/jump.wav");
 	jump0.setBuffer(jumpbuf0);
 
 	lowgbuf0.loadFromFile("res/sounds/lowg.wav");
@@ -91,7 +96,7 @@ void Main_menu::Load()
 
 	growbuf0.loadFromFile("res/sounds/grow.wav");
 	grow0.setBuffer(growbuf0);
-	grow0.setVolume(200.0f);
+	grow0.setVolume(200.0f);*/
 
 
 
@@ -136,27 +141,29 @@ void Main_menu::Load()
 
 	snake1 = makeEntity();
 	snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-	auto s = snake1->addComponent<ShapeComponent>();
+	auto s1 = snake1->addComponent<SpriteComponent>();
+	s1->setTexure(snakesprite);
+	/*auto s = snake1->addComponent<ShapeComponent>();
 	s->setShape<sf::CircleShape>(10.f);
 	s->getShape().setFillColor(Color::White);
 	s->getShape().setOrigin(30.f, 30.f);
 	s->getShape().setOutlineThickness(5);
-	s->getShape().setOutlineColor(sf::Color(100, 100, 100));
-	//snakespeak1 = makeEntity();
-	//snakespeak1->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
+	s->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 	auto t3 = snake1->addComponent<TextComponent>("");
 	t3->SetPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]) + Vector2f(-10.0f, -150.0f));
-	t3->SetColour(Color::Magenta);
+	t3->SetColour(Color::Green);
 	//t2->render();
 
 	snake2 = makeEntity();
 	snake2->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
-	auto w = snake2->addComponent<ShapeComponent>();
+	auto s2 = snake2->addComponent<SpriteComponent>();
+	s2->setTexure(snakesprite1);
+	/*auto w = snake2->addComponent<ShapeComponent>();
 	w->setShape<sf::CircleShape>(10.f);
 	w->getShape().setFillColor(Color::White);
 	w->getShape().setOrigin(30.f, 30.f);
 	w->getShape().setOutlineThickness(5);
-	w->getShape().setOutlineColor(sf::Color(100, 100, 100));
+	w->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 	auto t4 = snake2->addComponent<TextComponent>("");
 	t4->SetPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]) + Vector2f(-10.0f, -150.0f));
 	t4->SetColour(Color::Cyan);
@@ -222,7 +229,7 @@ void Main_menu::Update(const double & dt)
 		cooldown0 = 1.0;
 		if (isbigger0 == false)
 		{
-			shrink0.play();
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(0.5f, 0.5f);
 			isbigger0 = true;
@@ -244,7 +251,7 @@ void Main_menu::Update(const double & dt)
 		}
 		else
 		{
-			grow0.play();
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			isbigger0 = false;
@@ -270,7 +277,7 @@ void Main_menu::Update(const double & dt)
 		cooldown0 = 1.0;
 		if (issmaller0 == false)
 		{
-			grow0.play();
+			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(2.0f, 2.0f);
 			issmaller0 = true;
@@ -292,7 +299,7 @@ void Main_menu::Update(const double & dt)
 		}
 		else
 		{
-			shrink0.play();
+			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
 			issmaller0 = false;
@@ -329,15 +336,15 @@ void Main_menu::Update(const double & dt)
 
 	sf::Vector2f pos1 = snake1->getPosition();
 
-	pos1.x += ((player->getPosition().x - 30.0f) - pos1.x)*lerp01*dt;
-	pos1.y += ((player->getPosition().y - 50.0f) - pos1.y)*lerp01*dt;
+	pos1.x += ((player->getPosition().x - 90.0f) - pos1.x)*lerp01*dt;
+	pos1.y += ((player->getPosition().y - 90.0f) - pos1.y)*lerp01*dt;
 
 	snake1->setPosition(pos1);
 
 	sf::Vector2f pos2 = snake2->getPosition();
 
-	pos2.x += ((player->getPosition().x - 5.0f) - pos2.x)*lerp01*dt;
-	pos2.y += ((player->getPosition().y - 30.0f) - pos2.y)*lerp01*dt;
+	pos2.x += ((player->getPosition().x - 90.0f) - pos2.x)*lerp01*dt;
+	pos2.y += ((player->getPosition().y - 90.0f) - pos2.y)*lerp01*dt;
 
 	snake2->setPosition(pos2);
 
@@ -345,7 +352,7 @@ void Main_menu::Update(const double & dt)
 
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("< to your left the \n adventure begins");
-		t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		t->render();
 
 		//speach1 = true;
@@ -355,34 +362,34 @@ void Main_menu::Update(const double & dt)
 		//speach0 = true;
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("< ... and to the right the \n mysterious land of options");
-		t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		//t->SetPosition(Vector2f(0.0f, 0.0f));
 	}
 	if (ospeakcool2 <= 0) {
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("");
-		t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		auto t1 = snake2->get_components<TextComponent>()[0];
-		t1->SetText("< I think they \n know how to read...");
-		t1->SetPosition(snake2->getPosition() + Vector2f(20.0f, -50.0f));
+		t1->SetText("  I think they \n< know how to read...");
+		t1->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}
 	if (ospeakcool3 <= 0) {
 		auto t = snake2->get_components<TextComponent>()[0];
 		t->SetText("");
-		t->SetPosition(snake2->getPosition() + Vector2f(20.0f, -50.0f));
+		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}
 
-	if (sounddown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Up)) {
+	if (sounddown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Up)||sounddown0<=0 &&controls.jump()==true) {
 		sounddown0 = 1;
-		jump0.play();
+		jump.play();
 	}
-	if (sounddown01 <= 0 && Keyboard::isKeyPressed(Keyboard::S)) {
+	if (sounddown01 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown01 <= 0 && controls.speed()==true) {
 		sounddown01 = 3;
-		speed0.play();
+		speed.play();
 	}
-	if (sounddown02 <= 0 && Keyboard::isKeyPressed(Keyboard::D)) {
+	if (sounddown02 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown02 <= 0 && controls.lowg()==true) {
 		sounddown02 = 3;
-		lowg0.play();
+		lowg.play();
 	}
 
 	Scene::Update(dt);

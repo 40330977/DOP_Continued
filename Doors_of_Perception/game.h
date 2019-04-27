@@ -21,6 +21,20 @@ extern Level3Scene level3;
 
 extern sf::Sound sound;
 //extern bool full;
+extern sf::SoundBuffer buffer;
+extern sf::SoundBuffer jumpbuf;
+extern sf::SoundBuffer lowgbuf;
+extern sf::SoundBuffer speedbuf;
+extern sf::SoundBuffer shrinkbuf;
+extern sf::SoundBuffer growbuf;
+
+extern sf::Sound jump;
+extern sf::Sound lowg;
+extern sf::Sound speed;
+//sf::Sound sound;
+extern sf::Sound shrink;
+extern sf::Sound grow;
 
 
 extern Controls controls;
+

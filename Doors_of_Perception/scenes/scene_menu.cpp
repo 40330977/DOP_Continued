@@ -16,6 +16,29 @@ void MenuScene::Load() {
 	
   cout << "Menu Load \n";
   {
+	  //sf::Music music;
+	  buffer.loadFromFile("res/sounds/dopst.wav");
+	  sound.setBuffer(buffer);
+	  sound.setLoop(true);
+	  //sound.play();
+	  sound.setVolume(50.0f);
+
+	  jumpbuf.loadFromFile("res/sounds/jump.wav");
+	  jump.setBuffer(jumpbuf);
+
+	  lowgbuf.loadFromFile("res/sounds/lowg.wav");
+	  lowg.setBuffer(lowgbuf);
+
+	  speedbuf.loadFromFile("res/sounds/speed.wav");
+	  speed.setBuffer(speedbuf);
+
+	  shrinkbuf.loadFromFile("res/sounds/shrink.wav");
+	  shrink.setBuffer(shrinkbuf);
+	  shrink.setVolume(200.0f);
+
+	  growbuf.loadFromFile("res/sounds/grow.wav");
+	  grow.setBuffer(growbuf);
+	  grow.setVolume(200.0f);
 
 	  // Is joystick #0 connected?
 	  bool connected = sf::Joystick::isConnected(0);
