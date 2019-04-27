@@ -208,6 +208,7 @@ double ospeakcool2 = 10;
 double ospeakcool3 = 14;
 void Main_menu::Update(const double & dt)
 {
+	controls.update(dt);
 	if (cooldown0 >= 0) { cooldown0 -= dt; }
 	if (sounddown0 >= 0) { sounddown0 -= dt; }
 	if (sounddown01 >= 0) { sounddown01 -= dt; }
@@ -217,7 +218,7 @@ void Main_menu::Update(const double & dt)
 	if (ospeakcool2 >= 0) { ospeakcool2 -= dt; }
 	if (ospeakcool3 >= 0) { ospeakcool3 -= dt; }
 
-	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::A)) {
+	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::A)|| cooldown0 <= 0 && controls.triggers()>10) {
 		cooldown0 = 1.0;
 		if (isbigger0 == false)
 		{
@@ -265,7 +266,7 @@ void Main_menu::Update(const double & dt)
 		}
 	}
 
-	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Q)) {
+	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown0 <= 0 && controls.triggers() < -10) {
 		cooldown0 = 1.0;
 		if (issmaller0 == false)
 		{

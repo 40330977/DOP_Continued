@@ -65,8 +65,8 @@ void MenuScene::Load() {
 void MenuScene::Update(const double& dt) {
 	controls.update(dt);
   // cout << "Menu Update "<<dt<<"\n";
-	//int poser = Joystick::getAxisPosition(0, sf::Joystick::PovX);
-  if (sf::Keyboard::isKeyPressed(Keyboard::Space)||controls.start()==true) {
+	//int poser = Joystick::getAxisPosition(0, sf::Joystick::Z);
+  if (sf::Keyboard::isKeyPressed(Keyboard::Space)||controls.start()==true/*||poser>10*/) {
 	  //int poser = Joystick::getAxisPosition(0, sf::Joystick::X);
     Engine::ChangeScene(&mainmenu);
 	//Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "", sf::Style::Fullscreen);

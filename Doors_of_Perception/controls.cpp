@@ -14,15 +14,20 @@ void Controls::update(double dt)
 	if (Joystick::isButtonPressed(0, 7) == true) {
 		startb = true;
 	}
+	else { startb = false; }
 	if (Joystick::isButtonPressed(0, 0) == true) {
 		jumpb = true;
 	}
+	else { jumpb = false; }
 	if (Joystick::isButtonPressed(0, 4) == true) {
 		lowgb = true;
 	}
+	else { lowgb = false; }
 	if (Joystick::isButtonPressed(0, 5) == true) {
 		speedb = true;
 	}
+	else { speedb = false; }
+	
 	leftstick = Joystick::getAxisPosition(0, sf::Joystick::X);
 	trigger = Joystick::getAxisPosition(0, sf::Joystick::Z);
 }

@@ -3,6 +3,8 @@
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Audio.hpp>
+#include "../controls.h"
+#include "../game.h"
 
 
 using namespace std;
@@ -46,12 +48,13 @@ void PlayerPhysicsComponent::update(double dt) {
   }
 
   if (Keyboard::isKeyPressed(Keyboard::Left) ||
-      Keyboard::isKeyPressed(Keyboard::Right)) {
+      Keyboard::isKeyPressed(Keyboard::Right) || controls.stick()>10||controls.stick()<-10) {
     // Moving Either Left or Right
-    if (Keyboard::isKeyPressed(Keyboard::Right)) {
+	  int test = controls.stick();
+    if (Keyboard::isKeyPressed(Keyboard::Right) || controls.stick() > 10) {
       if (getVelocity().x < _maxVelocity.x)
         impulse({(float)(dt * _groundspeed), 0});
-    } else {
+    } else if(Keyboard::isKeyPressed(Keyboard::Left)|| controls.stick() < -10){
       if (getVelocity().x > -_maxVelocity.x)
         impulse({-(float)(dt * _groundspeed), 0});
     }
@@ -61,12 +64,12 @@ void PlayerPhysicsComponent::update(double dt) {
   }
 
   // Handle Jump
-  if (Keyboard::isKeyPressed(Keyboard::Up)) {
+  if (Keyboard::isKeyPressed(Keyboard::Up)||controls.jump()==true) {
     _grounded = isGrounded();
     if (_grounded) {
       setVelocity(Vector2f(getVelocity().x, 0.f));
       teleport(Vector2f(pos.x, pos.y - 2.0f));
-	  if (Keyboard::isKeyPressed(Keyboard::D))
+	  if (Keyboard::isKeyPressed(Keyboard::D)||controls.lowg()==true)
 	  {
 		  impulse(Vector2f(0, -14.f));
 	  }
@@ -88,7 +91,7 @@ void PlayerPhysicsComponent::update(double dt) {
   }
  
 
-  if (Keyboard::isKeyPressed(Keyboard::S))
+  if (Keyboard::isKeyPressed(Keyboard::S)||controls.speed()==true)
 	{
 	  
 		_maxVelocity = Vector2f(600.f, 800.f);
@@ -107,12 +110,12 @@ void PlayerPhysicsComponent::update(double dt) {
   v.y = copysign(min(abs(v.y), _maxVelocity.y), v.y);
   setVelocity(v);
 
-  bool isbigger = false;
-  if (Keyboard::isKeyPressed(Keyboard::A) && isbigger == false)
-  {
-	  //_size *= 2.0;
-	  isbigger = true;
-  }
+  //bool isbigger = false;
+  //if (Keyboard::isKeyPressed(Keyboard::A) && isbigger == false)
+  //{
+	 // //_size *= 2.0;
+	 // isbigger = true;
+  //}
 
   PhysicsComponent::update(dt);
 }

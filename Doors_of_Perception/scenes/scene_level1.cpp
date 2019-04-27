@@ -246,7 +246,7 @@ double sounddown2 = 0;
 double speakcool0 = 3;
 double speakcool1 = 5;
 void Level1Scene::Update(const double& dt) {
-	
+	controls.update(dt);
 	if (cooldown >= 0) { cooldown -= dt; }
 	if (sounddown >= 0) { sounddown -= dt; }
 	if (sounddown1 >= 0) { sounddown1 -= dt; }
