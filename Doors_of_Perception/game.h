@@ -8,6 +8,7 @@
 #include "scenes/main_menu.h"
 #include "scenes/options.h"
 #include <SFML/Audio.hpp>
+#include "controls.h"
 
 using namespace sf;
 
@@ -21,3 +22,5 @@ extern Level3Scene level3;
 extern sf::Sound sound;
 //extern bool full;
 
+
+extern Controls controls;

@@ -3,14 +3,32 @@
 #include "../game.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
+//#include <joystickapi.h>
+#include <SFML\Window\Joystick.hpp>
+
 
 using namespace std;
 using namespace sf;
+
+
 
 void MenuScene::Load() {
 	
   cout << "Menu Load \n";
   {
+
+	  // Is joystick #0 connected?
+	  bool connected = sf::Joystick::isConnected(0);
+	  cout << std::noboolalpha << connected;
+	  // How many buttons does joystick #0 support?
+	  unsigned int buttons = sf::Joystick::getButtonCount(0);
+	  // Does joystick #0 define a X axis?
+	  bool hasX = sf::Joystick::hasAxis(0, sf::Joystick::X);
+	  // Is button #2 pressed on joystick #0?
+	  bool pressed = sf::Joystick::isButtonPressed(0, 2);
+	  // What's the current position of the Y axis on joystick #0?
+	  float position = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+
 	  Vector2f winpass = Vector2f(Engine::GetWindow().getView().getSize().x, Engine::GetWindow().getView().getSize().y);
 	  winpass.x /= 2.75;
 	  winpass.y /= 2.5;
@@ -45,9 +63,11 @@ void MenuScene::Load() {
 }
 
 void MenuScene::Update(const double& dt) {
+	controls.update(dt);
   // cout << "Menu Update "<<dt<<"\n";
-
-  if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
+	//int poser = Joystick::getAxisPosition(0, sf::Joystick::PovX);
+  if (sf::Keyboard::isKeyPressed(Keyboard::Space)||controls.start()==true) {
+	  //int poser = Joystick::getAxisPosition(0, sf::Joystick::X);
     Engine::ChangeScene(&mainmenu);
 	//Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "", sf::Style::Fullscreen);
   }

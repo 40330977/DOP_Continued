@@ -2,6 +2,7 @@
 #include "game.h"
 #include "scenes/scene_menu.h"
 
+
 using namespace std;
 
 MenuScene menu;
@@ -13,6 +14,9 @@ Level3Scene level3;
 
 sf::Sound sound;
 //bool full;
+
+Controls controls;
+
 
 
 //sf::Style:Fullscreen
