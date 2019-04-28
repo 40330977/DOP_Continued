@@ -51,6 +51,7 @@ const float lerp01 = 1.0f;
 
 void Main_menu::Load()
 {
+	time1 = timer1.getElapsedTime();
 	ls::loadLevelFile("res/mainmenu.txt", 40.0f);
 
 	//auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
@@ -202,6 +203,7 @@ void Main_menu::UnLoad()
 	ls::unload();
 	Scene::UnLoad();
 }
+
 bool isbigger0 = false;
 bool issmaller0 = false;
 //bool speach0 = false;
@@ -209,21 +211,16 @@ double cooldown0 = 0;
 double sounddown0 = 0;
 double sounddown01 = 0;
 double sounddown02 = 0;
-double ospeakcool0 = 3;
-double ospeakcool1 = 7;
-double ospeakcool2 = 10;
-double ospeakcool3 = 14;
+
 void Main_menu::Update(const double & dt)
 {
+	time2 = timer1.getElapsedTime();
 	controls.update(dt);
 	if (cooldown0 >= 0) { cooldown0 -= dt; }
 	if (sounddown0 >= 0) { sounddown0 -= dt; }
 	if (sounddown01 >= 0) { sounddown01 -= dt; }
 	if (sounddown02 >= 0) { sounddown02 -= dt; }
-	if (ospeakcool0 >= 0) { ospeakcool0 -= dt; }
-	if (ospeakcool1 >= 0) { ospeakcool1 -= dt; }
-	if (ospeakcool2 >= 0) { ospeakcool2 -= dt; }
-	if (ospeakcool3 >= 0) { ospeakcool3 -= dt; }
+	
 
 	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::A)|| cooldown0 <= 0 && controls.triggers()>10) {
 		cooldown0 = 1.0;
@@ -348,7 +345,8 @@ void Main_menu::Update(const double & dt)
 
 	snake2->setPosition(pos2);
 
-	if (ospeakcool0 <= 0 /*&& speach0 == false*/) {
+	//if (ospeakcool0 <= 0 /*&& speach0 == false*/) {
+	if (time2.asSeconds()>= (time1.asSeconds()+3.0f)) {
 
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("< to your left the \n adventure begins");
@@ -358,14 +356,14 @@ void Main_menu::Update(const double & dt)
 		//speach1 = true;
 
 	}
-	if (ospeakcool1 <= 0 /*&& speach1 == true*/) {
+	if (time2.asSeconds() >= (time1.asSeconds() + 6.0f)) {
 		//speach0 = true;
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("< ... and to the right the \n mysterious land of options");
 		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		//t->SetPosition(Vector2f(0.0f, 0.0f));
 	}
-	if (ospeakcool2 <= 0) {
+	if (time2.asSeconds() >= (time1.asSeconds() + 9.0f)) {
 		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("");
 		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
@@ -373,7 +371,7 @@ void Main_menu::Update(const double & dt)
 		t1->SetText("  I think they \n< know how to read...");
 		t1->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}
-	if (ospeakcool3 <= 0) {
+	if (time2.asSeconds() >= (time1.asSeconds() + 12.0f)) {
 		auto t = snake2->get_components<TextComponent>()[0];
 		t->SetText("");
 		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));

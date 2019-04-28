@@ -111,19 +111,19 @@ void options::Load()
 
 	text1 = makeEntity();
 	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]));
-	auto t1 = text1->addComponent<TextComponent>("Full Screen");
+	auto t1 = text1->addComponent<TextComponent>("Toggle Full Screen with 'V'");
 	t1->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]) + Vector2f(0.0f, -50.0f));
 	t1->render();
 
 	text2 = makeEntity();
 	text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
-	auto t2 = text2->addComponent<TextComponent>("Windowed");
+	auto t2 = text2->addComponent<TextComponent>("");
 	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]) + Vector2f(0.0f, -50.0f));
 	t2->render();
 
 	text3 = makeEntity();
 	//text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
-	auto t3 = text3->addComponent<TextComponent>("Instructions:\nP = return to menu\n<-/-> = move left and right\nUp = jump\nQ = grow\nA = shrink\nS = increase speed\nD = lower gravity");
+	auto t3 = text3->addComponent<TextComponent>("Instructions(keyboard/joystick):\nP/start = return to menu\n<-/->/left stick = move left and right\nUp/A = jump\nQ/right trigger = grow\nA/left trigger = shrink\nS/right bumber = increase speed\nD/left bumper = lower gravity");
 	t3->SetPosition(Vector2f(500.0f, 300.0f));
 	t3->render();
 
@@ -361,12 +361,12 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
-	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false) {
+	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false||controls.start() ==true&&full1==false) {
 		Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "Doors of Perception", sf::Style::Fullscreen);
 		full1 = true;
 		//Engine::fullscreen(full, 1280, 720, "Doors of Perception");
 	}
-	if (/*player->getPosition()==wincheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==true) {
+	if (/*player->getPosition()==wincheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==true || controls.start() == true && full1 == true) {
 		
 		Engine::GetWindow().create(VideoMode(1280, 720), "Doors of Perception");
 		full1 = false;

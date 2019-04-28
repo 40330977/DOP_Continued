@@ -10,6 +10,7 @@
 #include <SFML/Audio.hpp>
 #include "controls.h"
 
+
 using namespace sf;
 
 extern MenuScene menu;
@@ -38,3 +39,6 @@ extern sf::Sound grow;
 
 extern Controls controls;
 
+extern sf::Clock timer1;
+extern sf::Time time1;
+extern sf::Time time2;

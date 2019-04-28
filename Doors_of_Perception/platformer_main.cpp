@@ -31,7 +31,9 @@ sf::Sound grow;
 
 Controls controls;
 
-  
+sf::Clock timer1;
+sf::Time time1;
+sf::Time time2;
 
 //sf::Style:Fullscreen
 int main() {
