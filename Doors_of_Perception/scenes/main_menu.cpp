@@ -373,6 +373,11 @@ void Main_menu::Update(const double & dt)
 	}
 	if (time2.asSeconds() >= (time1.asSeconds() + 12.0f)) {
 		auto t = snake2->get_components<TextComponent>()[0];
+		t->SetText("  also, instructions can\n< be found in options");
+		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
+	}
+	if (time2.asSeconds() >= (time1.asSeconds() + 15.0f)) {
+		auto t = snake2->get_components<TextComponent>()[0];
 		t->SetText("");
 		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}

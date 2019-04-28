@@ -117,7 +117,7 @@ void options::Load()
 
 	text2 = makeEntity();
 	text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
-	auto t2 = text2->addComponent<TextComponent>("");
+	auto t2 = text2->addComponent<TextComponent>("for controllers x = full screen y = windowed");
 	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]) + Vector2f(0.0f, -50.0f));
 	t2->render();
 
@@ -361,12 +361,12 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
-	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false||controls.start() ==true&&full1==false) {
+	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false ||Joystick::isButtonPressed(0, 2) == true && full1 == false) {
 		Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "Doors of Perception", sf::Style::Fullscreen);
 		full1 = true;
 		//Engine::fullscreen(full, 1280, 720, "Doors of Perception");
 	}
-	if (/*player->getPosition()==wincheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==true || controls.start() == true && full1 == true) {
+	if (/*player->getPosition()==wincheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==true || Joystick::isButtonPressed(0, 3) == true && full1 == true) {
 		
 		Engine::GetWindow().create(VideoMode(1280, 720), "Doors of Perception");
 		full1 = false;

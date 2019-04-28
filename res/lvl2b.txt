@@ -1,18 +1,18 @@
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 b                                                                                                                                                                                                    b
-b       w                                                                                                                                                                                            b
-b       w                                                                                                                                                                                            b
-w       w                                                                                                                                                                                            b
-w       w                                                                     ww                                                                                                                     b
+b                                                                                                                                                                                                    b
+b s                                                                 n                n                               n                                                                               b
+w       w                                                                                     wwwww                                                                                                  b
+w                                                                             ww                                                                                                                     b
 wwwww   w                                          wwww  ww  ww  ww  ww  ww                                                                                                                          b
-w       w                                                                                                                                                                                            b
-w       w                               www           wwwwwwwwwww                   wwwwww                                                                                                           b
-w  wwwwww                              w                                                                                                                                                             b
-w       w                             w               www                                                                                                                                            b
-w       w                            w                w  w                       www                                                                                                                 b
+w                  n                    n                                                                 n        ww                                   wwww                                         b
+w       w                               www           wwwwwwwwwww                   wwwwww                                                             w    w                                        b
+w  wwwwww                    n         w                                       n                            ww                   ww  ww  ww  ww  ww   w      w                                       b
+w       w                             w               www                                                                                            w        w                                      b
+w                                    w                w  w       n               www                                      ww     wwwwwwwwwwwwwwwwwwww          w                                     b
 wwwwww  w                           w                 w   w                                                                                                                                          b
-w       w   www  w  w  w  w  w  w  w               wwww    www   ww     wwww                                                                                                                         b
-w s        ww                                                                                                                                                                                        b
+w       w   www  w  w  w  w  w  w  w               wwww    www   ww     wwww                       wwwww                                                                                             b
+w          ww                                                                                                       n                                                                                b
 w  wwwwwwwwww                                                        www                                                                                                                             b
 w                                                                                                                                                                                                    b
 wwwww                                                                                                                                                          eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeew
