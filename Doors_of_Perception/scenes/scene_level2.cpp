@@ -26,8 +26,8 @@ void Level2Scene::Load() {
   cout << "Scene 2 Load" << endl;
   //ls::loadLevelFile("res/level_2.txt", 40.0f);
   ls::loadLevelFile("res/lvl2b.txt", 40.0f);
-  //auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  //ls::setOffset(Vector2f(0, ho));
+  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+  ls::setOffset(Vector2f(0, ho));
   snakesprite = Resources::get<Texture>("snake1.png");
   snakesprite1 = Resources::get<Texture>("snake2.png");
   // Create player
@@ -216,6 +216,7 @@ void Level2Scene::Update(const double& dt) {
 		if (issmaller1 == false)
 		{
 			grow.play();
+			player->setPosition(player->getPosition() + Vector2f(0.0f, 62.0f));
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(2.0f, 2.0f);
 			issmaller1 = true;

@@ -347,7 +347,7 @@ void Level1Scene::Update(const double& dt) {
 	if (speakcool0 <= 0&& speach0 == false) {
 
 		auto t = text->get_components<TextComponent>()[0];
-		t->SetText("< testing testing 123!");
+		t->SetText("< use your powers \nto survive!");
 		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		t->render();
 		
