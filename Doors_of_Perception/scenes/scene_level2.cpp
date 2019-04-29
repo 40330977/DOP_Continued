@@ -74,7 +74,7 @@ void Level2Scene::Load() {
   w->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
   // Create Enemy
-  for (int i = 0; i < 7; i++)
+  for (int i = 0; i < 9; i++)
   {
 
 	  const float modder = 2.0f;
