@@ -7,6 +7,7 @@
 #include "scenes/scene_menu.h"
 #include "scenes/main_menu.h"
 #include "scenes/options.h"
+#include "scenes/kremap.h"
 #include <SFML/Audio.hpp>
 #include "controls.h"
 #include "savegame.h"
@@ -20,6 +21,7 @@ using namespace sf;
 extern MenuScene menu;
 extern Main_menu mainmenu;
 extern options option;
+extern Kremap kremap;
 extern Level1Scene level1;
 extern Level2Scene level2;
 extern Level3Scene level3;

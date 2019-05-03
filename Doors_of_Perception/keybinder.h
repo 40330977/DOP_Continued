@@ -23,5 +23,6 @@ public:
 	void remapgrow();
 	void remapspeed();
 	void remaplowg();
+	Keyboard::Key update(Window window);
 
 };

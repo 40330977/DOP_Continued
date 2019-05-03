@@ -361,6 +361,9 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
+	if (ls::getTileAt(player->getPosition()) == ls::FULL) {
+		Engine::ChangeScene((Scene*)&kremap);
+	}
 	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false ||Joystick::isButtonPressed(0, 2) == true && full1 == false) {
 		Engine::GetWindow().create(sf::VideoMode::getFullscreenModes()[0], "Doors of Perception", sf::Style::Fullscreen);
 		full1 = true;
