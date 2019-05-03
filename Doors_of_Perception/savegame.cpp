@@ -21,7 +21,7 @@ string Savegame::load(string saved)
 	{
 		while (getline(myfile, saved))
 		{
-			cout << saved;
+			//cout << saved;
 		}
 		myfile.close();
 	}

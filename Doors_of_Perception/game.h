@@ -10,7 +10,9 @@
 #include <SFML/Audio.hpp>
 #include "controls.h"
 #include "savegame.h"
+#include "keybinder.h"
 #include <string.h>
+
 
 
 using namespace sf;
@@ -44,7 +46,9 @@ extern Controls controls;
 extern Savegame saver;
 extern string saved;
 extern string savepass;
+extern Keybinder keybind;
 
 extern sf::Clock timer1;
 extern sf::Time time1;
 extern sf::Time time2;
+

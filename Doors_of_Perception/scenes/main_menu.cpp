@@ -50,6 +50,8 @@ sf::View view0(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp0 = 0.5f;
 const float lerp01 = 1.0f;
 
+
+
 void Main_menu::Load()
 {
 	time1 = timer1.getElapsedTime();

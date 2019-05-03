@@ -4,6 +4,7 @@
 
 class Main_menu : public Scene {
 public:
+
 	void Load() override;
 
 	void UnLoad() override;

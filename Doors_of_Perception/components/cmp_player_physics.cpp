@@ -47,14 +47,14 @@ void PlayerPhysicsComponent::update(double dt) {
     teleport(ls::getTilePosition(ls::findTiles(ls::START)[0]));
   }
 
-  if (Keyboard::isKeyPressed(Keyboard::Left) ||
-      Keyboard::isKeyPressed(Keyboard::Right) || controls.stick()>20||controls.stick()<-20) {
+  if (Keyboard::isKeyPressed(keybind.kleft) ||
+      Keyboard::isKeyPressed(keybind.kright) || controls.stick()>20||controls.stick()<-20) {
     // Moving Either Left or Right
 	  int test = controls.stick();
-    if (Keyboard::isKeyPressed(Keyboard::Right) || controls.stick() > 20) {
+    if (Keyboard::isKeyPressed(keybind.kright) || controls.stick() > 20) {
       if (getVelocity().x < _maxVelocity.x)
         impulse({(float)(dt * _groundspeed), 0});
-    } else if(Keyboard::isKeyPressed(Keyboard::Left)|| controls.stick() < -20){
+    } else if(Keyboard::isKeyPressed(keybind.kleft)|| controls.stick() < -20){
       if (getVelocity().x > -_maxVelocity.x)
         impulse({-(float)(dt * _groundspeed), 0});
     }
@@ -64,12 +64,12 @@ void PlayerPhysicsComponent::update(double dt) {
   }
 
   // Handle Jump
-  if (Keyboard::isKeyPressed(Keyboard::Up)||controls.jump()==true) {
+  if (Keyboard::isKeyPressed(keybind.kjump)||controls.jump()==true) {
     _grounded = isGrounded();
     if (_grounded) {
       setVelocity(Vector2f(getVelocity().x, 0.f));
       teleport(Vector2f(pos.x, pos.y - 2.0f));
-	  if (Keyboard::isKeyPressed(Keyboard::D)||controls.lowg()==true)
+	  if (Keyboard::isKeyPressed(keybind.klowg)||controls.lowg()==true)
 	  {
 		  impulse(Vector2f(0, -14.f));
 	  }
@@ -91,7 +91,7 @@ void PlayerPhysicsComponent::update(double dt) {
   }
  
 
-  if (Keyboard::isKeyPressed(Keyboard::S)||controls.speed()==true)
+  if (Keyboard::isKeyPressed(keybind.kspeed)||controls.speed()==true)
 	{
 	  
 		_maxVelocity = Vector2f(600.f, 800.f);

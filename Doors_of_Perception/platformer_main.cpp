@@ -39,6 +39,8 @@ sf::Clock timer1;
 sf::Time time1;
 sf::Time time2;
 
+Keybinder keybind;
+
 //sf::Style:Fullscreen
 int main() {
   Engine::Start(1280, 720, "Doors of Perception","null",&menu);
