@@ -31,14 +31,18 @@ sf::Sound grow;
 
 Controls controls;
 
+Savegame saver;
+string saved;
+string savepass;
+
 sf::Clock timer1;
 sf::Time time1;
 sf::Time time2;
 
 //sf::Style:Fullscreen
 int main() {
-  //Engine::Start(1280, 720, "Doors of Perception","null",&menu);
-  Engine::Start(1280, 720, "Doors of Perception", "null", &level2);
+  Engine::Start(1280, 720, "Doors of Perception","null",&menu);
+  //Engine::Start(1280, 720, "Doors of Perception", "null", &level2);
   //Engine::Start(1280, 720, "Platformer1", "sf::Style:Fullscreen", &menu);
   
 }

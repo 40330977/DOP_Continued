@@ -9,6 +9,8 @@
 #include "scenes/options.h"
 #include <SFML/Audio.hpp>
 #include "controls.h"
+#include "savegame.h"
+#include <string.h>
 
 
 using namespace sf;
@@ -38,6 +40,10 @@ extern sf::Sound grow;
 
 
 extern Controls controls;
+
+extern Savegame saver;
+extern string saved;
+extern string savepass;
 
 extern sf::Clock timer1;
 extern sf::Time time1;

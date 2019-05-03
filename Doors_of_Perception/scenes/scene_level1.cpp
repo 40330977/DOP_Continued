@@ -376,6 +376,7 @@ void Level1Scene::Update(const double& dt) {
 
   Scene::Update(dt);
   if (ls::getTileAt(player->getPosition()) == ls::END) {
+	  saver.save("level2");
 	  Engine::ChangeScene((Scene*)&level2);
   }
   else if (!player->isAlive()) {

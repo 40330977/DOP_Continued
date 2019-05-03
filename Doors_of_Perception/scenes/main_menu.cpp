@@ -25,6 +25,7 @@ static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
 static shared_ptr<Entity> text1;
 static shared_ptr<Entity> text2;
+static shared_ptr<Entity> text3;
 static shared_ptr<Entity> snakespeak1;
 static shared_ptr<Entity> snakespeak2;
 static shared_ptr<Texture> snakesprite;
@@ -103,9 +104,15 @@ void Main_menu::Load()
 
 	text = makeEntity();
 	text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
-	auto t = text->addComponent<TextComponent>("Play");
-	t->SetPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]) + Vector2f(0.0f, -180.0f));
+	auto t = text->addComponent<TextComponent>("New Game");
+	t->SetPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]) + Vector2f(0.0f, -80.0f));
 	t->render();
+
+	text3 = makeEntity();
+	text3->setPosition(ls::getTilePosition(ls::findTiles(ls::WIN)[0]));
+	auto ti = text3->addComponent<TextComponent>("Load Game");
+	ti->SetPosition(ls::getTilePosition(ls::findTiles(ls::WIN)[0]) + Vector2f(0.0f, -80.0f));
+	ti->render();
 
 	text1 = makeEntity();
 	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
@@ -394,13 +401,22 @@ void Main_menu::Update(const double & dt)
 		sounddown02 = 3;
 		lowg.play();
 	}
-
+	savepass = saver.load(saved);
 	Scene::Update(dt);
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
+		saver.save("level1");
 		Engine::ChangeScene((Scene*)&level1);
 	}
 	else if (ls::getTileAt(player->getPosition()) == ls::OPT) {
 		Engine::ChangeScene((Scene*)&option);
+	}
+	else if (ls::getTileAt(player->getPosition()) == ls::WIN) {
+		if (savepass == "level1") {
+			Engine::ChangeScene((Scene*)&level1);
+		}
+		else if (savepass == "level2") {
+			Engine::ChangeScene((Scene*)&level2);
+		}
 	}
 	/*else if (!player->isAlive()) {
 		Engine::ChangeScene((Scene*)&level1);

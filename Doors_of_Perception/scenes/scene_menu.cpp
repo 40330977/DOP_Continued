@@ -17,7 +17,9 @@ void MenuScene::Load() {
 	
   cout << "Menu Load \n";
   {
+	  savepass = saver.load(saved);
 	  //sf::Music music;
+	  savepass;
 	  buffer.loadFromFile("res/sounds/dopst.wav");
 	  sound.setBuffer(buffer);
 	  sound.setLoop(true);
