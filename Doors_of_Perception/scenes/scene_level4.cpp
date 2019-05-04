@@ -1,6 +1,7 @@
 #include "scene_level2.h"
 #include "scene_level1.h"
 #include "scene_level3.h"
+#include "scene_level4.h"
 #include "../components/cmp_enemy_ai.h"
 #include "../components/cmp_enemy_turret.h"
 #include "../components/cmp_hurt_player.h"
@@ -20,16 +21,16 @@ static shared_ptr<Entity> snake2;
 static shared_ptr<Entity> text;
 static shared_ptr<Texture> snakesprite;
 static shared_ptr<Texture> snakesprite1;
-sf::View view31(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
+sf::View view41(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
 const float lerp = 0.5f;
 const float lerp1 = 1.0f;
 
-void Level3Scene::Load() {
+void Level4Scene::Load() {
 	cout << "Scene 2 Load" << endl;
 	//ls::loadLevelFile("res/level_2.txt", 40.0f);
-	ls::loadLevelFile("res/lvl3.txt", 40.0f);
-	 auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-	 ls::setOffset(Vector2f(0, ho));
+	ls::loadLevelFile("res/lvl4.txt", 40.0f);
+	auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+	ls::setOffset(Vector2f(0, ho));
 	snakesprite = Resources::get<Texture>("snake1.png");
 	snakesprite1 = Resources::get<Texture>("snake2.png");
 	sound.play();
@@ -146,34 +147,34 @@ void Level3Scene::Load() {
 	setLoaded(true);
 }
 
-void Level3Scene::UnLoad() {
+void Level4Scene::UnLoad() {
 	cout << "Scene 2 UnLoad" << endl;
 	player.reset();
 	ls::unload();
 	Scene::UnLoad();
 }
 
-bool isbigger3 = false;
-bool issmaller3 = false;
-double cooldown3 = 0;
-double sounddown30 = 0;
-double sounddown31 = 0;
-double sounddown32 = 0;
-void Level3Scene::Update(const double& dt) {
+bool isbigger4 = false;
+bool issmaller4 = false;
+double cooldown4 = 0;
+double sounddown40 = 0;
+double sounddown41 = 0;
+double sounddown42 = 0;
+void Level4Scene::Update(const double& dt) {
 	controls.update(dt);
-	if (cooldown3 >= 0) { cooldown3 -= dt; }
-	if (sounddown30 >= 0) { sounddown30 -= dt; }
-	if (sounddown31 >= 0) { sounddown31 -= dt; }
-	if (sounddown32 >= 0) { sounddown32 -= dt; }
+	if (cooldown4 >= 0) { cooldown4 -= dt; }
+	if (sounddown40 >= 0) { sounddown40 -= dt; }
+	if (sounddown41 >= 0) { sounddown41 -= dt; }
+	if (sounddown42 >= 0) { sounddown42 -= dt; }
 
-	if (cooldown3 <= 0 && Keyboard::isKeyPressed(keybind.kshrink) || cooldown3 <= 0 && controls.triggers() > 10) {
-		cooldown3 = 1.0;
-		if (isbigger3 == false)
+	if (cooldown4 <= 0 && Keyboard::isKeyPressed(keybind.kshrink) || cooldown4 <= 0 && controls.triggers() > 10) {
+		cooldown4 = 1.0;
+		if (isbigger4 == false)
 		{
 			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(0.5f, 0.5f);
-			isbigger3 = true;
+			isbigger4 = true;
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(50.f, 50.f));*/
@@ -195,7 +196,7 @@ void Level3Scene::Update(const double& dt) {
 			grow.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
-			isbigger3 = false;
+			isbigger4 = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			p->changeSize(Vector2f(62.f, 62.f));
 
@@ -214,15 +215,15 @@ void Level3Scene::Update(const double& dt) {
 		}
 	}
 
-	if (cooldown3 <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown3 <= 0 && controls.triggers() < -10) {
-		cooldown3 = 1.0;
-		if (issmaller3 == false)
+	if (cooldown4 <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown4 <= 0 && controls.triggers() < -10) {
+		cooldown4 = 1.0;
+		if (issmaller4 == false)
 		{
 			grow.play();
 			player->setPosition(player->getPosition() + Vector2f(0.0f, 62.0f));
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(2.0f, 2.0f);
-			issmaller3 = true;
+			issmaller4 = true;
 
 			/* auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			 p->Sizer(Vector2f(50.f, 50.f));*/
@@ -244,7 +245,7 @@ void Level3Scene::Update(const double& dt) {
 			shrink.play();
 			auto s = player->get_components<ShapeComponent>()[0];
 			s->getShape().setScale(1.0f, 1.0f);
-			issmaller3 = false;
+			issmaller4 = false;
 			auto p = player->get_components<PlayerPhysicsComponent>()[0];
 			p->changeSize(Vector2f(62.f, 62.f));
 
@@ -272,7 +273,7 @@ void Level3Scene::Update(const double& dt) {
 
 	//focus->setPosition(player->getPosition());
 	//view.setCenter(player->getPosition());
-	view31.setCenter(focus->getPosition());
+	view41.setCenter(focus->getPosition());
 	sf::Vector2f pos1 = snake1->getPosition();
 
 	pos1.x += ((player->getPosition().x - 90.0f) - pos1.x)*lerp1*dt;
@@ -287,23 +288,23 @@ void Level3Scene::Update(const double& dt) {
 
 	snake2->setPosition(pos2);
 
-	if (sounddown30 <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown30 <= 0 && controls.jump() == true) {
-		sounddown30 = 1;
+	if (sounddown40 <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown40 <= 0 && controls.jump() == true) {
+		sounddown40 = 1;
 		jump.play();
 	}
-	if (sounddown31 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown31 <= 0 && controls.speed() == true) {
-		sounddown31 = 3;
+	if (sounddown41 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown41 <= 0 && controls.speed() == true) {
+		sounddown41 = 3;
 		speed.play();
 	}
-	if (sounddown32 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown32 <= 0 && controls.lowg() == true) {
-		sounddown32 = 3;
+	if (sounddown42 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown42 <= 0 && controls.lowg() == true) {
+		sounddown42 = 3;
 		lowg.play();
 	}
 
 	Scene::Update(dt);
 	const auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
-		saver.save("level4");
+		saver.save("level5");
 		Engine::ChangeScene((Scene*)&level4);
 	}
 	else if (!player->isAlive()) {
@@ -315,8 +316,8 @@ void Level3Scene::Update(const double& dt) {
 	}
 }
 
-void Level3Scene::Render() {
-	Engine::GetWindow().setView(view31);
+void Level4Scene::Render() {
+	Engine::GetWindow().setView(view41);
 	ls::render(Engine::GetWindow());
 	Scene::Render();
 }
