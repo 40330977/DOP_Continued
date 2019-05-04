@@ -215,6 +215,7 @@ LevelSystem::Tile LevelSystem::getTileAt(Vector2f v) {
   auto a = v - _offset;
   if (a.x < 0 || a.y < 0) {
     throw string("Tile out of range ");
+	//a.y = 0;
   }
   return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }

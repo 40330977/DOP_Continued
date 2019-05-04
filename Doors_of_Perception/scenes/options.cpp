@@ -217,7 +217,7 @@ void options::Update(const double & dt)
 	if (sounddown010 >= 0) { sounddown010 -= dt; }
 	if (sounddown020 >= 0) { sounddown020 -= dt; }
 
-	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::A) || cooldown00 <= 0 && controls.triggers() > 10) {
+	if (cooldown00 <= 0 && Keyboard::isKeyPressed(keybind.kshrink) || cooldown00 <= 0 && controls.triggers() > 10) {
 		cooldown00 = 1.0;
 		if (isbigger00 == false)
 		{
@@ -265,7 +265,7 @@ void options::Update(const double & dt)
 		}
 	}
 
-	if (cooldown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown00 <= 0 && controls.triggers() < -10) {
+	if (cooldown00 <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown00 <= 0 && controls.triggers() < -10) {
 		cooldown00 = 1.0;
 		if (issmaller00 == false)
 		{
@@ -340,15 +340,15 @@ void options::Update(const double & dt)
 
 	snake2->setPosition(pos2);
 
-	if (sounddown00 <= 0 && Keyboard::isKeyPressed(Keyboard::Up) || sounddown00 <= 0 && controls.jump() == true) {
+	if (sounddown00 <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown00 <= 0 && controls.jump() == true) {
 		sounddown00 = 1;
 		jump.play();
 	}
-	if (sounddown010 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown010 <= 0 && controls.speed() == true) {
+	if (sounddown010 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown010 <= 0 && controls.speed() == true) {
 		sounddown010 = 3;
 		speed.play();
 	}
-	if (sounddown020 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown020 <= 0 && controls.lowg() == true) {
+	if (sounddown020 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown020 <= 0 && controls.lowg() == true) {
 		sounddown020 = 3;
 		lowg.play();
 	}
@@ -361,7 +361,7 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
-	if (ls::getTileAt(player->getPosition()) == ls::OPT) {
+	else if (ls::getTileAt(player->getPosition()) == ls::OPT) {
 		Engine::ChangeScene((Scene*)&kremap);
 	}
 	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false ||Joystick::isButtonPressed(0, 2) == true && full1 == false) {

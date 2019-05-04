@@ -20,16 +20,18 @@ static shared_ptr<Entity> text;
 static shared_ptr<Texture> snakesprite;
 static shared_ptr<Texture> snakesprite1;
 sf::View view1(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280.0f, 720.0f));
+const float lerp = 0.5;
 const float lerp1 = 1.0f;
 
 void Level2Scene::Load() {
   cout << "Scene 2 Load" << endl;
   //ls::loadLevelFile("res/level_2.txt", 40.0f);
   ls::loadLevelFile("res/lvl2b.txt", 40.0f);
-  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  ls::setOffset(Vector2f(0, ho));
+ /* auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+  ls::setOffset(Vector2f(0, ho));*/
   snakesprite = Resources::get<Texture>("snake1.png");
   snakesprite1 = Resources::get<Texture>("snake2.png");
+  sound.play();
   // Create player
   {
     // *********************************
@@ -163,7 +165,7 @@ void Level2Scene::Update(const double& dt) {
 	if (sounddown21 >= 0) { sounddown21 -= dt; }
 	if (sounddown22 >= 0) { sounddown22 -= dt; }
 
-	if (cooldown1 <= 0 && Keyboard::isKeyPressed(Keyboard::A) || cooldown1 <= 0 && controls.triggers() > 10) {
+	if (cooldown1 <= 0 && Keyboard::isKeyPressed(keybind.kshrink) || cooldown1 <= 0 && controls.triggers() > 10) {
 		cooldown1 = 1.0;
 		if (isbigger1 == false)
 		{
@@ -211,7 +213,7 @@ void Level2Scene::Update(const double& dt) {
 		}
 	}
 
-	if (cooldown1 <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown1 <= 0 && controls.triggers() < -10) {
+	if (cooldown1 <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown1 <= 0 && controls.triggers() < -10) {
 		cooldown1 = 1.0;
 		if (issmaller1 == false)
 		{
@@ -262,8 +264,8 @@ void Level2Scene::Update(const double& dt) {
 	//sf::Vector2f viewpos = view.getCenter();
 	sf::Vector2f pos = focus->getPosition();
 
-	pos.x += (player->getPosition().x - pos.x)*lerp1*dt;
-	pos.y += (player->getPosition().y - pos.y)*lerp1*dt;
+	pos.x += (player->getPosition().x - pos.x)*lerp*dt;
+	pos.y += (player->getPosition().y - pos.y)*lerp*dt;
 
 	focus->setPosition(pos);
 
@@ -284,15 +286,15 @@ void Level2Scene::Update(const double& dt) {
 
 	snake2->setPosition(pos2);
 
-	if (sounddown20 <= 0 && Keyboard::isKeyPressed(Keyboard::Up) || sounddown20 <= 0 && controls.jump() == true) {
+	if (sounddown20 <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown20 <= 0 && controls.jump() == true) {
 		sounddown20 = 1;
 		jump.play();
 	}
-	if (sounddown21 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown21 <= 0 && controls.speed() == true) {
+	if (sounddown21 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown21 <= 0 && controls.speed() == true) {
 		sounddown21 = 3;
 		speed.play();
 	}
-	if (sounddown22 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown22 <= 0 && controls.lowg() == true) {
+	if (sounddown22 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown22 <= 0 && controls.lowg() == true) {
 		sounddown22 = 3;
 		lowg.play();
 	}
@@ -300,7 +302,8 @@ void Level2Scene::Update(const double& dt) {
   Scene::Update(dt);
   const auto pp = player->getPosition();
   if (ls::getTileAt(pp) == ls::END) {
-    Engine::ChangeScene((Scene*)&mainmenu);
+	  saver.save("level3");
+    Engine::ChangeScene((Scene*)&level3);
   } else if (!player->isAlive()) {
     Engine::ChangeScene((Scene*)&level2);
   }

@@ -231,7 +231,7 @@ void Main_menu::Update(const double & dt)
 	if (sounddown02 >= 0) { sounddown02 -= dt; }
 	
 
-	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::A)|| cooldown0 <= 0 && controls.triggers()>10) {
+	if (cooldown0 <= 0 && Keyboard::isKeyPressed(keybind.kshrink)|| cooldown0 <= 0 && controls.triggers()>10) {
 		cooldown0 = 1.0;
 		if (isbigger0 == false)
 		{
@@ -279,7 +279,7 @@ void Main_menu::Update(const double & dt)
 		}
 	}
 
-	if (cooldown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown0 <= 0 && controls.triggers() < -10) {
+	if (cooldown0 <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown0 <= 0 && controls.triggers() < -10) {
 		cooldown0 = 1.0;
 		if (issmaller0 == false)
 		{
@@ -391,15 +391,15 @@ void Main_menu::Update(const double & dt)
 		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}
 
-	if (sounddown0 <= 0 && Keyboard::isKeyPressed(Keyboard::Up)||sounddown0<=0 &&controls.jump()==true) {
+	if (sounddown0 <= 0 && Keyboard::isKeyPressed(keybind.kjump)||sounddown0<=0 &&controls.jump()==true) {
 		sounddown0 = 1;
 		jump.play();
 	}
-	if (sounddown01 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown01 <= 0 && controls.speed()==true) {
+	if (sounddown01 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown01 <= 0 && controls.speed()==true) {
 		sounddown01 = 3;
 		speed.play();
 	}
-	if (sounddown02 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown02 <= 0 && controls.lowg()==true) {
+	if (sounddown02 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown02 <= 0 && controls.lowg()==true) {
 		sounddown02 = 3;
 		lowg.play();
 	}
@@ -418,6 +418,9 @@ void Main_menu::Update(const double & dt)
 		}
 		else if (savepass == "level2") {
 			Engine::ChangeScene((Scene*)&level2);
+		}
+		else if (savepass == "level3") {
+			Engine::ChangeScene((Scene*)&level3);
 		}
 	}
 	/*else if (!player->isAlive()) {

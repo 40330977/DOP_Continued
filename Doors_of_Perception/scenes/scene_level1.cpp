@@ -220,7 +220,7 @@ void Level1Scene::Update(const double& dt) {
 	if (speakcool0 >= 0) { speakcool0 -= dt; }
 	if (speakcool1 >= 0) { speakcool1 -= dt; }
 
-	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::A) || cooldown <= 0 && controls.triggers() > 10){
+	if (cooldown <= 0 && Keyboard::isKeyPressed(keybind.kshrink) || cooldown <= 0 && controls.triggers() > 10){
 		cooldown = 1.0;
 		if (isbigger == false)
 		{
@@ -268,7 +268,7 @@ void Level1Scene::Update(const double& dt) {
 		}
 	}
 
-	if (cooldown <= 0 && Keyboard::isKeyPressed(Keyboard::Q) || cooldown <= 0 && controls.triggers() < -10) {
+	if (cooldown <= 0 && Keyboard::isKeyPressed(keybind.kgrow) || cooldown <= 0 && controls.triggers() < -10) {
 		cooldown = 1.0;
 		if (issmaller == false)
 		{
@@ -361,15 +361,15 @@ void Level1Scene::Update(const double& dt) {
 		t->SetPosition(Vector2f(0.0f, 0.0f));
 	}
 
-	if (sounddown <= 0 && Keyboard::isKeyPressed(Keyboard::Up) || sounddown <= 0 && controls.jump() == true) {
+	if (sounddown <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown <= 0 && controls.jump() == true) {
 		sounddown = 1;
 		jump.play();
 	}
-	if (sounddown1 <= 0 && Keyboard::isKeyPressed(Keyboard::S) || sounddown1 <= 0 && controls.speed() == true) {
+	if (sounddown1 <= 0 && Keyboard::isKeyPressed(keybind.kspeed) || sounddown1 <= 0 && controls.speed() == true) {
 		sounddown1 = 3;
 		speed.play();
 	}
-	if (sounddown2 <= 0 && Keyboard::isKeyPressed(Keyboard::D) || sounddown2 <= 0 && controls.lowg() == true) {
+	if (sounddown2 <= 0 && Keyboard::isKeyPressed(keybind.klowg) || sounddown2 <= 0 && controls.lowg() == true) {
 		sounddown2 = 3;
 		lowg.play();
 	}
