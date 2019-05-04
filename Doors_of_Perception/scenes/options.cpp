@@ -110,20 +110,20 @@ void options::Load()
 	t->render();
 
 	text1 = makeEntity();
-	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]));
+	text1->setPosition(ls::getTilePosition(ls::findTiles(ls::FULL)[1]));
 	auto t1 = text1->addComponent<TextComponent>("Toggle Full Screen with 'V'");
-	t1->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[0]) + Vector2f(0.0f, -50.0f));
+	t1->SetPosition(ls::getTilePosition(ls::findTiles(ls::FULL)[1]) + Vector2f(0.0f, -50.0f));
 	t1->render();
 
 	text2 = makeEntity();
-	text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
+	text2->setPosition(ls::getTilePosition(ls::findTiles(ls::FULL)[0]));
 	auto t2 = text2->addComponent<TextComponent>("for controllers x = full screen y = windowed");
-	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]) + Vector2f(0.0f, -50.0f));
+	t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::FULL)[0]) + Vector2f(0.0f, -50.0f));
 	t2->render();
 
 	text3 = makeEntity();
 	//text2->setPosition(ls::getTilePosition(ls::findTiles(ls::OPT)[1]));
-	auto t3 = text3->addComponent<TextComponent>("Instructions(keyboard/joystick):\nP/start = return to menu\n<-/->/left stick = move left and right\nUp/A = jump\nQ/right trigger = grow\nA/left trigger = shrink\nS/right bumber = increase speed\nD/left bumper = lower gravity");
+	auto t3 = text3->addComponent<TextComponent>("Instructions(keyboard/joystick):\nP/start = return to menu\n<-/->/left stick = move left and right\nUp/A = jump\nQ/right trigger = grow\nA/left trigger = shrink\nS/right bumber = increase speed\nD/left bumper = lower gravity\nGo left to customise keyboard controls");
 	t3->SetPosition(Vector2f(500.0f, 300.0f));
 	t3->render();
 
@@ -361,7 +361,7 @@ void options::Update(const double & dt)
 	if (ls::getTileAt(player->getPosition()) == ls::END) {
 		Engine::ChangeScene((Scene*)&mainmenu);
 	}
-	if (ls::getTileAt(player->getPosition()) == ls::FULL) {
+	if (ls::getTileAt(player->getPosition()) == ls::OPT) {
 		Engine::ChangeScene((Scene*)&kremap);
 	}
 	if (/*player->getPosition() == fullcheck*/Keyboard::isKeyPressed(Keyboard::V)&&full1 ==false ||Joystick::isButtonPressed(0, 2) == true && full1 == false) {

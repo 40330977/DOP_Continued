@@ -36,7 +36,7 @@ void Kremap::Load()
 	text = makeEntity();
 	text->setPosition(Vector2f(0.0f, 0.0f));
 	auto t = text->addComponent<TextComponent>(
-		"press key to rebind\npress new key\n press space to return to menu");
+		"press enter & key to rebind\npress new key\npress space to return to menu");
 	t->SetPosition(winpass);
 
 
@@ -64,17 +64,56 @@ void Kremap::UnLoad()
 }
 
 //sf::Event e;
-
+Keyboard::Key transfer;
 void Kremap::Update(const double & dt)
 {
+	//transfer = keybind.update();
+	//sf::Window win1 = Engine::GetWindow().
 	if (sf::Keyboard::isKeyPressed(Keyboard::Space) || controls.start()) {
 
 		Engine::ChangeScene(&mainmenu);
 	}
-	if (Keyboard::isKeyPressed(keybind.kright)) {
-		keybind.remapright();
+	//keybind.update();
+	if (Keyboard::isKeyPressed(Keyboard::Return)) {
+		if (Keyboard::isKeyPressed(keybind.kright)) {
+			//cout << "test keybind";		
+			keybind.remapright();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.kleft)) {
+			//cout << "test keybind";		
+			keybind.remapleft();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.kjump)) {
+			//cout << "test keybind";		
+			keybind.remapjump();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.kshrink)) {
+			//cout << "test keybind";		
+			keybind.remapshrink();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.kgrow)) {
+			//cout << "test keybind";		
+			keybind.remapgrow();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.kspeed)) {
+			//cout << "test keybind";		
+			keybind.remapspeed();
+			Engine::ChangeScene(&mainmenu);
+		}
+		if (Keyboard::isKeyPressed(keybind.klowg)) {
+			//cout << "test keybind";		
+			keybind.remaplowg();
+			Engine::ChangeScene(&mainmenu);
+		}
 	}
-
+	/*if (Keyboard::isKeyPressed(Keyboard::Return)) {
+		
+	}*/
 	Scene::Update(dt);
 }
 

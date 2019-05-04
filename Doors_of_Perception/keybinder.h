@@ -1,6 +1,7 @@
 #pragma once
 #include <ecm.h>
 #include <SFML\Window\Keyboard.hpp>
+#include <SFML\Window\Event.hpp>
 
 
 using namespace sf;
@@ -14,6 +15,14 @@ public:
 	Keyboard::Key kgrow = Keyboard::Q;
 	Keyboard::Key kspeed = Keyboard::S;
 	Keyboard::Key klowg = Keyboard::D;
+	sf::Event _event;
+	sf::Event _event1;
+	sf::Event _event2;
+	sf::Event _event3;
+	sf::Event _event4;
+	sf::Event _event5;
+	sf::Event _event6;
+	Keyboard::Key passer;
 
 public:
 	void remapright();
@@ -23,6 +32,6 @@ public:
 	void remapgrow();
 	void remapspeed();
 	void remaplowg();
-	Keyboard::Key update(Window window);
+	//Keyboard::Key update();
 
 };
