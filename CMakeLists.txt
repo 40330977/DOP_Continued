@@ -63,6 +63,14 @@ source_group("resources" FILES ${RESOURCE_FILES})
 #target_include_directories(Doors_of_Perception SYSTEM PRIVATE ${SFML_INCS} ${B2D_INCS})
 target_link_libraries(Doors_of_Perception lib_engine lib_maths)
 set(EXECUTABLES ${EXECUTABLES} Doors_of_Perception)
+add_dependencies(Doors_of_Perception copy_resources)
+
+add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
+  -E copy_directory
+    "${PROJECT_SOURCE_DIR}/res"
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
+)
+
 
 
 
