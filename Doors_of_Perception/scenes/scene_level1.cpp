@@ -37,6 +37,7 @@ const float lerp = 0.5f;
 const float lerp1 = 1.0f;
 
 void Level1Scene::Load() {
+	time1 = timer1.getElapsedTime();
 	//Engine::GetWindow().setKeyRepeatEnabled(false);
   cout << " Scene 1 Load" << endl;
   //ls::loadLevelFile("res/level_1.txt", 40.0f);
@@ -77,6 +78,9 @@ void Level1Scene::Load() {
   snake1->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
   auto s1 = snake1->addComponent<SpriteComponent>();
   s1->setTexure(snakesprite);
+  auto t3 = snake1->addComponent<TextComponent>("");
+  t3->SetPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]) + Vector2f(-10.0f, -150.0f));
+  t3->SetColour(Color::Green);
   //auto s = snake1->addComponent<ShapeComponent>();
   /*s->setShape<sf::CircleShape>(10.f);
   s->getShape().setFillColor(Color::White);
@@ -88,6 +92,9 @@ void Level1Scene::Load() {
   snake2->setPosition(player->getPosition() - Vector2f(10.0f, 10.0f));
   auto s2 = snake2->addComponent<SpriteComponent>();
   s2->setTexure(snakesprite1);
+  auto t2 = snake2->addComponent<TextComponent>("");
+  t2->SetPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]) + Vector2f(-10.0f, -150.0f));
+  t2->SetColour(Color::Cyan);
   /*auto w = snake2->addComponent<ShapeComponent>();
   w->setShape<sf::CircleShape>(10.f);
   w->getShape().setFillColor(Color::White);
@@ -99,6 +106,7 @@ void Level1Scene::Load() {
   text->setPosition(ls::getTilePosition(ls::findTiles(ls::END)[0]));
   auto t = text->addComponent<TextComponent>("");
   t->SetPosition(snake1->getPosition() + Vector2f(20.0f, -50.0f));
+  t->SetColour(Color::Green);
   
   //t->render();
 
@@ -212,6 +220,7 @@ double sounddown2 = 0;
 double speakcool0 = 3;
 double speakcool1 = 5;
 void Level1Scene::Update(const double& dt) {
+	time2 = timer1.getElapsedTime();
 	controls.update(dt);
 	if (cooldown >= 0) { cooldown -= dt; }
 	if (sounddown >= 0) { sounddown -= dt; }
@@ -344,21 +353,40 @@ void Level1Scene::Update(const double& dt) {
 	snake2->setPosition(pos2);
 
 
-	if (speakcool0 <= 0&& speach0 == false) {
+	if (time2.asSeconds() >= (time1.asSeconds() + 3.0f)) {
 
-		auto t = text->get_components<TextComponent>()[0];
-		t->SetText("< use your powers \nto survive!");
+		auto t = snake1->get_components<TextComponent>()[0];
+		t->SetText("< Use your powers\n to get to the end!");
 		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
 		t->render();
-		
+
 		//speach1 = true;
-		
+
 	}
-	if(speakcool1 <= 0 /*&& speach1 == true*/){
-		speach0 = true;
-		auto t = text->get_components<TextComponent>()[0];
+	if (time2.asSeconds() >= (time1.asSeconds() + 6.0f)) {
+		//speach0 = true;
+		auto t = snake1->get_components<TextComponent>()[0];
+		t->SetText("< Your body may be trapped but \n  you can unlock your mind!");
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
+		//t->SetPosition(Vector2f(0.0f, 0.0f));
+	}
+	if (time2.asSeconds() >= (time1.asSeconds() + 9.0f)) {
+		auto t = snake1->get_components<TextComponent>()[0];
 		t->SetText("");
-		t->SetPosition(Vector2f(0.0f, 0.0f));
+		t->SetPosition(snake1->getPosition() + Vector2f(100.0f, -18.0f));
+		auto t1 = snake2->get_components<TextComponent>()[0];
+		t1->SetText("  The shapes will try\n< and stop you...");
+		t1->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
+	}
+	if (time2.asSeconds() >= (time1.asSeconds() + 12.0f)) {
+		auto t = snake2->get_components<TextComponent>()[0];
+		t->SetText("...I'm not even sure\n< if they're people anymore!");
+		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
+	}
+	if (time2.asSeconds() >= (time1.asSeconds() + 15.0f)) {
+		auto t = snake2->get_components<TextComponent>()[0];
+		t->SetText("");
+		t->SetPosition(snake2->getPosition() + Vector2f(100.0f, -18.0f));
 	}
 
 	if (sounddown <= 0 && Keyboard::isKeyPressed(keybind.kjump) || sounddown <= 0 && controls.jump() == true) {

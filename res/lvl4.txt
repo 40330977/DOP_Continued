@@ -1,18 +1,18 @@
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 b                                                                                                                                                                                                    b
-b                                                                                                                                                                                                    b
-b                                                                                                                                                                                                    b
-w  s                                                                                                                                                                                                 b
+b                       n                                                                                                                                                                            b
+b                                                               n                  n             n             n                      n                     n                                        b
+w  s              w  w  w  w  w  w                                                                                                                                                                   b
+w                                                       wwwwww             wwww  wwww                                          wwwwwwww   www                                                        b
+w      wwww     wwwwwwwwwwwwwwwwwwww    wwww    wwww                                                  w                    n          w                                                              b
+w                                                  w                wwww                           w     w                            w            wwww  ww                                          b
+w                         n                        w               w                      w  w  w           w           w  w          w                    w                                         b
+w                                               n  w              w                                            w     w                w        www          w                                        b
+w                                   wwwwwwwww      w             w                                                w            wwwww  w                      w                                       b
+w           n        wwwww                  w      w            w                                                                  w  w   ww                  w                                      b
+w                                           w      n         www                                                                   w  w   w                    w                                     b
+w                                           w                                                                                      w      w                     w                                    b
+w                                           w    wwwwwww                                                                           wwwwwwww                                                          b
+w      wwww                                                                                                                                                                                          b
 w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-w                                                                                                                                                                                                    b
-wwwww                                                                                                                                                          eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeew
+wwwww         wwwww            wwwwww       wwwwwwww                                                                                                           eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeew

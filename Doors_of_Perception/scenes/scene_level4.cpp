@@ -78,7 +78,7 @@ void Level4Scene::Load() {
 	w->getShape().setOutlineColor(sf::Color(100, 100, 100));*/
 
 	// Create Enemy
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 7; i++)
 	{
 
 		const float modder = 2.0f;
@@ -305,10 +305,10 @@ void Level4Scene::Update(const double& dt) {
 	const auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
 		saver.save("level5");
-		Engine::ChangeScene((Scene*)&level4);
+		Engine::ChangeScene((Scene*)&level5);
 	}
 	else if (!player->isAlive()) {
-		Engine::ChangeScene((Scene*)&level3);
+		Engine::ChangeScene((Scene*)&level4);
 	}
 	if (Keyboard::isKeyPressed(Keyboard::P) || controls.start() == true) {
 		sound.stop();

@@ -5,6 +5,7 @@
 #include "scenes/scene_level2.h"
 #include "scenes/scene_level3.h"
 #include "scenes/scene_level4.h"
+#include "scenes/scene_level5.h"
 #include "scenes/scene_menu.h"
 #include "scenes/main_menu.h"
 #include "scenes/options.h"
@@ -27,6 +28,7 @@ extern Level1Scene level1;
 extern Level2Scene level2;
 extern Level3Scene level3;
 extern Level4Scene level4;
+extern Level5Scene level5;
 
 extern sf::Sound sound;
 //extern bool full;

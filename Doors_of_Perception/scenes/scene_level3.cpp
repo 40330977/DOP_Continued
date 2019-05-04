@@ -303,8 +303,8 @@ void Level3Scene::Update(const double& dt) {
 	Scene::Update(dt);
 	const auto pp = player->getPosition();
 	if (ls::getTileAt(pp) == ls::END) {
-		saver.save("level4");
-		Engine::ChangeScene((Scene*)&level4);
+		saver.save("level5");
+		Engine::ChangeScene((Scene*)&level5);
 	}
 	else if (!player->isAlive()) {
 		Engine::ChangeScene((Scene*)&level3);

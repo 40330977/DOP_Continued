@@ -425,6 +425,9 @@ void Main_menu::Update(const double & dt)
 		else if (savepass == "level4") {
 			Engine::ChangeScene((Scene*)&level4);
 		}
+		else if (savepass == "level5") {
+			Engine::ChangeScene((Scene*)&level5);
+		}
 	}
 	/*else if (!player->isAlive()) {
 		Engine::ChangeScene((Scene*)&level1);
